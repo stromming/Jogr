@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Jogr</string>
+    <string name="speed_info">Din hastighet är: -.- m/s</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+</resources>

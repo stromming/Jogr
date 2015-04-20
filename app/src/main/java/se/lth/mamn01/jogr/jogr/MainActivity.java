@@ -2,13 +2,16 @@ package se.lth.mamn01.jogr.jogr;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 
@@ -74,5 +77,12 @@ public class MainActivity extends Activity implements LocationListener {
     @Override
     public void onProviderDisabled(String provider) {
 
+    }
+
+    public void nextPage(View view){
+        System.out.println("pressed");
+        Log.d("test", "Pressed");
+       Intent intent = new Intent(this, StatScreen.class);
+       startActivity(intent);
     }
 }

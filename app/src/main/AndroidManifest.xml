@@ -3,6 +3,7 @@
     package="se.lth.mamn01.jogr.jogr" >
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" />
     <application
 
         android:allowBackup="true"
@@ -17,6 +18,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".StatScreen"
+            android:label="@string/app_name" >
+
         </activity>
     </application>
 

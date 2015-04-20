@@ -8,5 +8,12 @@
     <TextView android:text="@string/speed_info" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/speedText"/>
-
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/button_text"
+        android:onClick="nextPage"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

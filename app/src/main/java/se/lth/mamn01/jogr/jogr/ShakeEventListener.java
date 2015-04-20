@@ -53,17 +53,10 @@ public class ShakeEventListener implements SensorEventListener {
 
     private SensorManager mSensorManager;
     private Sensor mSensor;
-private Context context;
-    public ShakeEventListener(Context context){
-        System.out.println("ShakeEventListener konstruktor");
-        this.context = context;
 
-        mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
 
-        if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null){
-            mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        }
-    }
+
+
     /**
      * Interface for shake gesture.
      */
@@ -80,14 +73,16 @@ private Context context;
     }
 
 
-
+//Denna kod verkar köras även när sensorn inte ändras. Spelar dock ingen roll, så länge vi läser av värdena på accelerometern.
     @Override
     public void onSensorChanged(SensorEvent se) {
         // get sensor data
         float x = se.values[0];
         float y = se.values[1];
         float z = se.values[2];
-System.out.println("X: "+x+" Y: " +y + " Z: " +z);
+//System.out.println("X: "+x+" Y: " +y + " Z: " +z);
+  //      mShakeListener.onShake();
+
         // calculate movement
         float totalMovement = Math.abs(x + y + z - lastX - lastY - lastZ);
 

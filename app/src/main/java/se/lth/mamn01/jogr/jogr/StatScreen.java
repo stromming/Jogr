@@ -6,6 +6,7 @@ package se.lth.mamn01.jogr.jogr;
 
 import android.app.Activity;
 import android.content.Context;
+import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.Menu;
@@ -26,10 +27,17 @@ public class StatScreen extends Activity implements ShakeEventListener.OnShakeLi
         System.out.println("onCreate i StatScreen");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mSensorListener = new ShakeEventListener(this.getApplicationContext());
 
-        mSensorListener.setOnShakeListener(this);
+
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mSensorListener = new ShakeEventListener();
+
+        mSensorListener.setOnShakeListener(new ShakeEventListener.OnShakeListener() {
+
+            public void onShake() {
+               System.out.println("Shaked!");
+            }
+        });
 
 
     }
@@ -63,5 +71,18 @@ public class StatScreen extends Activity implements ShakeEventListener.OnShakeLi
         TextView txt = (TextView) this.findViewById(R.id.text);
         txt.setText("Skakad!");
         Toast.makeText(getApplicationContext(), "Shake!", Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSensorManager.registerListener(mSensorListener,
+                mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_UI);
+    }
+
+    @Override
+    protected void onPause() {
+        mSensorManager.unregisterListener(mSensorListener);
+        super.onPause();
     }
 }

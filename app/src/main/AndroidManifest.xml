@@ -26,6 +26,11 @@
             android:label="@string/app_name" >
 
         </activity>
+        <activity
+            android:name=".Simulering"
+            android:label="@string/app_name" >
+
+        </activity>
     </application>
 
 </manifest>

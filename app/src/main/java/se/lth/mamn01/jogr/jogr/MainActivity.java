@@ -82,7 +82,7 @@ public class MainActivity extends Activity implements LocationListener {
     public void nextPage(View view){
         System.out.println("pressed");
         Log.d("test", "Pressed");
-       Intent intent = new Intent(this, StatScreen.class);
+       Intent intent = new Intent(this, Simulering.class);
        startActivity(intent);
     }
 }

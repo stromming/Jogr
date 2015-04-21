@@ -1,13 +1,9 @@
 package se.lth.mamn01.jogr.jogr;
 
 
-import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
-import android.content.Context;
-import android.widget.TextView;
 
 /**
  * Listener that detects shake gesture.
@@ -22,10 +18,10 @@ public class ShakeEventListener implements SensorEventListener {
      * Minimum times in a shake gesture that the direction of movement needs to
      * change.
      */
-    private static final int MIN_DIRECTION_CHANGE = 3;
+    private static final int MIN_DIRECTION_CHANGE = 2;
 
     /** Maximum pause between movements. */
-    private static final int MAX_PAUSE_BETHWEEN_DIRECTION_CHANGE = 200;
+    private static final int MAX_PAUSE_BETWEEN_DIRECTION_CHANGE = 200;
 
     /** Maximum allowed time for shake gesture. */
     private static final int MAX_TOTAL_DURATION_OF_SHAKE = 400;
@@ -51,8 +47,6 @@ public class ShakeEventListener implements SensorEventListener {
     /** OnShakeListener that is called when shake is detected. */
     private OnShakeListener mShakeListener;
 
-    private SensorManager mSensorManager;
-    private Sensor mSensor;
 
 
 
@@ -61,7 +55,7 @@ public class ShakeEventListener implements SensorEventListener {
      * Interface for shake gesture.
      */
     public interface OnShakeListener {
-
+//TODO Ändra till "onShakeRight" och "onShakeLeft"
         /**
          * Called when shake gesture is detected.
          */
@@ -80,13 +74,22 @@ public class ShakeEventListener implements SensorEventListener {
         float x = se.values[0];
         float y = se.values[1];
         float z = se.values[2];
+
+
 //System.out.println("X: "+x+" Y: " +y + " Z: " +z);
-  //      mShakeListener.onShake();
+
+
 
         // calculate movement
-        float totalMovement = Math.abs(x + y + z - lastX - lastY - lastZ);
-
+        float totalMovement = Math.abs(x - lastX);
+//System.out.println(totalMovement);
         if (totalMovement > MIN_FORCE) {
+
+            //För test
+            mShakeListener.onShake();
+            resetShakeParameters();
+
+
 
             // get time
             long now = System.currentTimeMillis();
@@ -99,7 +102,7 @@ public class ShakeEventListener implements SensorEventListener {
 
             // check if the last movement was not long ago
             long lastChangeWasAgo = now - mLastDirectionChangeTime;
-            if (lastChangeWasAgo < MAX_PAUSE_BETHWEEN_DIRECTION_CHANGE) {
+            if (lastChangeWasAgo < MAX_PAUSE_BETWEEN_DIRECTION_CHANGE) {
 
                 // store movement data
                 mLastDirectionChangeTime = now;

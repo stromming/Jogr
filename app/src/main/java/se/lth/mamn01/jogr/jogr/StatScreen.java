@@ -11,22 +11,22 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
 import android.widget.Toast;
 
 
-public class StatScreen extends Activity implements ShakeEventListener.OnShakeListener {
+public class StatScreen extends Activity {
 
     private SensorManager mSensorManager;
 
     private ShakeEventListener mSensorListener;
-
+    private int statCycler = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         System.out.println("onCreate i StatScreen");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stats);
+        setContentView(R.layout.activity_stats_0);
 
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -35,13 +35,31 @@ public class StatScreen extends Activity implements ShakeEventListener.OnShakeLi
         mSensorListener.setOnShakeListener(new ShakeEventListener.OnShakeListener() {
 
             public void onShake() {
+                Toast.makeText(getApplicationContext(), "Shake!", Toast.LENGTH_SHORT).show();
                System.out.println("Shaked!");
+                cycleStats();
             }
         });
 
 
     }
+public void cycleStats(){
+    statCycler++;
+    if(statCycler==3){
+        statCycler=0;
+    }
 
+    if(statCycler == 0){
+        setContentView(R.layout.activity_stats_0);
+    }
+    if(statCycler == 1){
+        setContentView(R.layout.activity_stats_1);
+    }
+    if(statCycler == 2){
+        setContentView(R.layout.activity_stats_2);
+    }
+
+}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -66,12 +84,7 @@ public class StatScreen extends Activity implements ShakeEventListener.OnShakeLi
     }
 
 
-    @Override
-    public void onShake() {
-        TextView txt = (TextView) this.findViewById(R.id.text);
-        txt.setText("Skakad!");
-        Toast.makeText(getApplicationContext(), "Shake!", Toast.LENGTH_SHORT).show();
-    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -84,5 +97,8 @@ public class StatScreen extends Activity implements ShakeEventListener.OnShakeLi
     protected void onPause() {
         mSensorManager.unregisterListener(mSensorListener);
         super.onPause();
+    }
+    public void shareToFacebook(View view){
+        Toast.makeText(getApplicationContext(), "Delat!", Toast.LENGTH_SHORT).show();
     }
 }

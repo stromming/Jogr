@@ -4,11 +4,17 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <TextView
-        android:layout_width="145dp"
+    <Space
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Detta aer en text"
-        android:id="@+id/text"
-        android:layout_gravity="center_horizontal"
         android:layout_weight="0.28" />
+
+    <TextView
+        android:layout_width="268dp"
+        android:layout_height="wrap_content"
+        android:text="Du brände 400 kcal!"
+        android:id="@+id/text1"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.28"
+        android:textSize="12pt" />
 </LinearLayout>

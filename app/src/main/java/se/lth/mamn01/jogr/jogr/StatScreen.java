@@ -99,6 +99,6 @@ public void cycleStats(){
         super.onPause();
     }
     public void shareToFacebook(View view){
-        Toast.makeText(getApplicationContext(), "Delat!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Shared!", Toast.LENGTH_SHORT).show();
     }
 }

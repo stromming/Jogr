@@ -12,9 +12,21 @@
     <TextView
         android:layout_width="268dp"
         android:layout_height="wrap_content"
-        android:text="Du brände 400 kcal!"
+        android:text="You burned 400 kcal! That's a ham sandwhich!"
         android:id="@+id/text1"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.28"
         android:textSize="12pt" />
+
+    <ImageView
+
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.41"
+        android:contentDescription="sandwich.png"
+        android:src="@mipmap/sandwich"
+        android:visibility="visible" />
+
 </LinearLayout>

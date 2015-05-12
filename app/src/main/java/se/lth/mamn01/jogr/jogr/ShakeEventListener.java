@@ -86,8 +86,8 @@ public class ShakeEventListener implements SensorEventListener {
         if (totalMovement > MIN_FORCE) {
 
             //För test
-            mShakeListener.onShake();
-            resetShakeParameters();
+           // mShakeListener.onShake();
+           // resetShakeParameters();
 
 
 

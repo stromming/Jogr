@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="204dp"
-        android:text="Du sprang 5 km på 25 minuter! Bra jobbat!"
+        android:text="You ran 5 km in 25 minutes. Well done!"
         android:id="@+id/text0"
         android:textSize="12pt" />
 </LinearLayout>

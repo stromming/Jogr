@@ -34,21 +34,34 @@ public class StatScreen extends Activity {
 
         mSensorListener.setOnShakeListener(new ShakeEventListener.OnShakeListener() {
 
-            public void onShake() {
-                Toast.makeText(getApplicationContext(), "Shake!", Toast.LENGTH_SHORT).show();
-               System.out.println("Shaked!");
-                cycleStats();
+            public void onShakeLeft() {
+             Toast.makeText(getApplicationContext(), "Left!", Toast.LENGTH_SHORT).show();
+             cycleStatsLeft();
+            }
+            public void onShakeRight(){
+             Toast.makeText(getApplicationContext(), "Right!", Toast.LENGTH_SHORT).show();
+             cycleStatsRight();
             }
         });
 
 
     }
-public void cycleStats(){
+public void cycleStatsRight() {
     statCycler++;
-    if(statCycler==3){
-        statCycler=0;
+    if (statCycler == 3) {
+        statCycler = 0;
     }
+    setLayout();
+}
 
+    public void cycleStatsLeft(){
+        statCycler--;
+        if(statCycler == -1){
+            statCycler = 2;
+        }
+        setLayout();
+    }
+public void setLayout(){
     if(statCycler == 0){
         setContentView(R.layout.activity_stats_0);
     }

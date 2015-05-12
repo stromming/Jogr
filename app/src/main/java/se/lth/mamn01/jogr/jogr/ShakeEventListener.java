@@ -5,20 +5,21 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 
+
 /**
  * Listener that detects shake gesture.
  */
 public class ShakeEventListener implements SensorEventListener {
 
-
+int direction = 0;
     /** Minimum movement force to consider. */
-    private static final int MIN_FORCE = 10;
-
+    private static final int MIN_FORCE = 6;
+    private static final int MIN_TIME_BETWEEN_SHAKES = 500;
     /**
      * Minimum times in a shake gesture that the direction of movement needs to
      * change.
      */
-    private static final int MIN_DIRECTION_CHANGE = 2;
+    private static final int MIN_DIRECTION_CHANGE = 3;
 
     /** Maximum pause between movements. */
     private static final int MAX_PAUSE_BETWEEN_DIRECTION_CHANGE = 200;
@@ -44,22 +45,25 @@ public class ShakeEventListener implements SensorEventListener {
     /** The last z position. */
     private float lastZ = 0;
 
+    private long blockTime = 0;
     /** OnShakeListener that is called when shake is detected. */
     private OnShakeListener mShakeListener;
 
 
 
 
+public ShakeEventListener(){
 
+}
     /**
      * Interface for shake gesture.
      */
     public interface OnShakeListener {
-//TODO Ändra till "onShakeRight" och "onShakeLeft"
         /**
          * Called when shake gesture is detected.
          */
-        void onShake();
+        void onShakeLeft();
+        void onShakeRight();
     }
 
     public void setOnShakeListener(OnShakeListener listener) {
@@ -76,14 +80,9 @@ public class ShakeEventListener implements SensorEventListener {
         float z = se.values[2];
 
 
-//System.out.println("X: "+x+" Y: " +y + " Z: " +z);
-
-
-
         // calculate movement
         float totalMovement = Math.abs(x - lastX);
-//System.out.println(totalMovement);
-        if (totalMovement > MIN_FORCE) {
+            if (totalMovement > MIN_FORCE) {
 
             //För test
            // mShakeListener.onShake();
@@ -96,8 +95,18 @@ public class ShakeEventListener implements SensorEventListener {
 
             // store first movement time
             if (mFirstDirectionChangeTime == 0) {
+                if(System.currentTimeMillis()-blockTime <= MIN_TIME_BETWEEN_SHAKES){
+                    return;
+                }
+
                 mFirstDirectionChangeTime = now;
                 mLastDirectionChangeTime = now;
+                if(x-lastX >= 0){
+                    direction = 1;
+                }
+                else{
+                    direction = 2;
+                }
             }
 
             // check if the last movement was not long ago
@@ -119,8 +128,19 @@ public class ShakeEventListener implements SensorEventListener {
                     // check total duration
                     long totalDuration = now - mFirstDirectionChangeTime;
                     if (totalDuration < MAX_TOTAL_DURATION_OF_SHAKE) {
-                        mShakeListener.onShake();
+
+                        blockTime = System.currentTimeMillis();
+
+                        if(direction == 1) {
+
+                            mShakeListener.onShakeRight();
+                        }
+                        else if(direction == 2){
+
+                            mShakeListener.onShakeLeft();
+                        }
                         resetShakeParameters();
+
                     }
                 }
 
@@ -140,6 +160,7 @@ public class ShakeEventListener implements SensorEventListener {
         lastX = 0;
         lastY = 0;
         lastZ = 0;
+        direction = 0;
     }
 
     @Override

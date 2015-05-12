@@ -15,18 +15,19 @@ import android.view.View;
 import android.widget.TextView;
 
 
-public class MainActivity extends Activity implements LocationListener {
-
+public class MainActivity extends Activity {
+    // tagit bort: implements LocationListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /*
         LocationManager lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,0, this);
 
         this.onLocationChanged(null);
-
+        */
     }
 
 
@@ -51,6 +52,8 @@ public class MainActivity extends Activity implements LocationListener {
 
         return super.onOptionsItemSelected(item);
     }
+ /*
+
 
     @Override
     public void onLocationChanged(Location location) {
@@ -77,6 +80,13 @@ public class MainActivity extends Activity implements LocationListener {
     @Override
     public void onProviderDisabled(String provider) {
 
+    }
+     */
+ public void kcal(View view){
+     setContentView(R.layout.activity_kcal);
+ }
+ public void distSpeed(View view){
+     setContentView(R.layout.activity_distspeed);
     }
 
     public void nextPage(View view){

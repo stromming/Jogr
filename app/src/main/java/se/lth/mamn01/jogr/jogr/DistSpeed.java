@@ -1,30 +1,32 @@
 package se.lth.mamn01.jogr.jogr;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.NumberPicker;
-import android.widget.TextView;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 
 
-public class MainActivity extends Activity {
-
-
+public class DistSpeed extends ActionBarActivity {
+    NumberPicker hPicker;
+    NumberPicker minPicker;
+    EditText dist;
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_distspeed);
+        dist =(EditText)findViewById(R.id.editText5);
+        hPicker = (NumberPicker)findViewById(R.id.hPicker);
+        hPicker.setMaxValue(10);
+        hPicker.setMinValue(0);
 
-
+        minPicker = (NumberPicker)findViewById(R.id.minPicker);
+        minPicker.setMaxValue(59);
+        minPicker.setMinValue(0);
     }
 
 
@@ -49,12 +51,15 @@ public class MainActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+    public void nextPage(View view){
+        System.out.println("pressed");
+        Log.d("test", "Pressed");
+        Intent intent = new Intent(this, Simulering.class);
+        String distString = dist.getText().toString();
+        int time = hPicker.getValue()* 3600+ minPicker.getValue()*60;
 
- public void kcal(View view){/*setContentView(R.layout.activity_kcal);*/
- }
- public void distSpeed(View view){
-     Intent intent = new Intent(this, DistSpeed.class);
-     startActivity(intent);
+        intent.putExtra("variables", distString +" "+time);
+
+        startActivity(intent);
     }
-
 }

@@ -7,15 +7,15 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.28" />
+        android:layout_weight="0.15" />
 
     <TextView
         android:layout_width="268dp"
         android:layout_height="wrap_content"
-        android:text="You burned 400 kcal! That's a ham sandwhich!"
+        android:text="Du brände 400 kcal! Det är en skinkmacka!"
         android:id="@+id/text1"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.28"
+        android:layout_weight="0.2"
         android:textSize="12pt" />
 
     <ImageView
@@ -29,4 +29,13 @@
         android:src="@mipmap/sandwich"
         android:visibility="visible" />
 
+    <Button
+        android:layout_width="219dp"
+        android:layout_height="wrap_content"
+        android:text="Dela till facebook!"
+        android:id="@+id/button_fb"
+        android:layout_weight="0.28"
+        android:layout_gravity="center_horizontal"
+        android:onClick="shareToFacebook"
+        />
 </LinearLayout>

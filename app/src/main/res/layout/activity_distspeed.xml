@@ -9,7 +9,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Avstånd (km)"
         android:id="@+id/textView6"
-        android:layout_centerVertical="true"
+        android:layout_above="@+id/editText5"
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -18,9 +18,9 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/editText5"
-        android:layout_below="@+id/textView6"
+        android:layout_above="@+id/button5"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp" />
+        android:layout_marginBottom="40dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -32,21 +32,51 @@
         android:layout_marginBottom="50dp"
         android:onClick="nextPage" />
 
-    <NumberPicker
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/hPicker"
-        android:layout_above="@+id/textView6"
-        android:layout_alignLeft="@+id/editText5"
-        android:layout_alignStart="@+id/editText5"
-        android:layout_marginBottom="46dp" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Tid"
+        android:id="@+id/textView3"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Timmar"
+        android:id="@+id/textView5"
+        android:layout_marginTop="42dp"
+        android:layout_below="@+id/textView3"
+        android:layout_alignLeft="@+id/hPicker"
+        android:layout_alignStart="@+id/hPicker" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Minuter"
+        android:id="@+id/textView7"
+        android:layout_alignTop="@+id/textView5"
+        android:layout_alignRight="@+id/minPicker"
+        android:layout_alignEnd="@+id/minPicker" />
 
     <NumberPicker
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/minPicker"
-        android:layout_alignTop="@+id/hPicker"
-        android:layout_toRightOf="@+id/button5"
-        android:layout_toEndOf="@+id/button5" />
+        android:layout_below="@+id/textView7"
+        android:layout_toRightOf="@+id/textView3"
+        android:layout_toEndOf="@+id/textView3"
+        android:layout_marginTop="54dp" />
+
+    <NumberPicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hPicker"
+        android:layout_alignTop="@+id/minPicker"
+        android:layout_alignLeft="@+id/editText5"
+        android:layout_alignStart="@+id/editText5" />
 
 </RelativeLayout>

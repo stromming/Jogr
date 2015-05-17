@@ -52,8 +52,7 @@ public class DistSpeed extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
     public void nextPage(View view){
-        System.out.println("pressed");
-        Log.d("test", "Pressed");
+
         Intent intent = new Intent(this, Simulering.class);
         String distString = dist.getText().toString();
         int time = hPicker.getValue()* 3600+ minPicker.getValue()*60;

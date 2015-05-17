@@ -7,16 +7,11 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.28" />
+        android:layout_weight="0.5" />
 
-    <Button
-        android:layout_width="219dp"
-        android:layout_height="wrap_content"
-        android:text="Share to facebook?"
-        android:id="@+id/button_fb"
-        android:layout_weight="0.28"
-        android:layout_gravity="center_horizontal"
-        android:onClick="shareToFacebook"
-        />
+    <com.jjoe64.graphview.GraphView
+        android:layout_width="match_parent"
+        android:layout_height="200dip"
+        android:id="@+id/graph" />
 
 </LinearLayout>

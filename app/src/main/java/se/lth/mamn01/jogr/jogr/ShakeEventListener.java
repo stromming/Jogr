@@ -11,9 +11,9 @@ import android.hardware.SensorEventListener;
  */
 public class ShakeEventListener implements SensorEventListener {
 
-int direction = 0;
+    int direction = 0;
     /** Minimum movement force to consider. */
-    private static final int MIN_FORCE = 6;
+    private static final int MIN_FORCE = 3;
     private static final int MIN_TIME_BETWEEN_SHAKES = 500;
     /**
      * Minimum times in a shake gesture that the direction of movement needs to
@@ -64,6 +64,8 @@ public ShakeEventListener(){
          */
         void onShakeLeft();
         void onShakeRight();
+        void onShakeForward();
+        void onShakeBack();
     }
 
     public void setOnShakeListener(OnShakeListener listener) {
@@ -81,8 +83,14 @@ public ShakeEventListener(){
 
 
         // calculate movement
-        float totalMovement = Math.abs(x - lastX);
-            if (totalMovement > MIN_FORCE) {
+        float totalMovementX = Math.abs(x - lastX);
+        float totalMovementZ = Math.abs(z - lastZ);
+
+            if (totalMovementZ > MIN_FORCE){
+
+            }
+
+            if (totalMovementX > MIN_FORCE) {
 
             //För test
            // mShakeListener.onShake();

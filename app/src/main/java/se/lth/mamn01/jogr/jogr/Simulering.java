@@ -74,7 +74,7 @@ public class Simulering extends Activity{
         counter = 0;
         loop=true;
         timeStarted = System.currentTimeMillis();
-        dist = 1000 * Integer.parseInt(values[0]);
+        dist = 100 * Integer.parseInt(values[0]);
         targetDist = dist;
         time = Integer.parseInt(values[1]);
         mediumSpeed= dist/time;
@@ -154,12 +154,12 @@ countGood = countGood%4;
                 countHigh++;
 
             }
-            dist= dist-(speed*20);
+            dist= dist-(speed*2);
             bar.setProgress((int)(100-100*dist/(double)(targetDist)));
 
 
 
-            handler.postDelayed(this, 2000);
+            handler.postDelayed(this, 1850);
         }
 
         }

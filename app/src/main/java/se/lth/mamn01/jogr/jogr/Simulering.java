@@ -27,6 +27,7 @@ public class Simulering extends Activity{
     int dist;
     int time;
     int speed;
+    int countGood,countLow,countHigh;
     int mediumSpeed;
     boolean loop;
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,10 @@ public class Simulering extends Activity{
         playHighSpeed = MediaPlayer.create(this,R.raw.highspeed);
         playLowSpeed = MediaPlayer.create(this,R.raw.lowspeed);
         Bundle extras = getIntent().getExtras();
+
+        countGood=0;
+        countLow=0;
+        countHigh =0;
         if (extras != null) {
             String value = extras.getString("variables");
             values =value.split("[ ]");
@@ -66,6 +71,9 @@ public class Simulering extends Activity{
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
+            countLow=countLow%4;
+            countGood=countGood%4;
+            countHigh=countHigh%4;
       /* do what you need to do */
             speed=speedPicker.getValue();
             System.out.println("loop "+dist+" : "+time +" : "+speed);
@@ -74,11 +82,27 @@ public class Simulering extends Activity{
                 playFinish.start();
                 loop=false;
             }else if(speed>= mediumSpeed && speed<=(mediumSpeed+2)){
-                playGoodSpeed.start();
+                if(countGood==0) {
+                    playGoodSpeed.start();
+                    countHigh=0;
+                    countHigh=0;
+                }
+                countGood++;
             }else if(speed<mediumSpeed){
-                playLowSpeed.start();
+                if(countLow==0) {
+                    playLowSpeed.start();
+                    countHigh=0;
+                    countGood=0;
+                }
+                countLow++;
             }else {
-                playHighSpeed.start();
+                if(countHigh==0){
+                    playHighSpeed.start();
+                    countGood=0;
+                    countLow=0;
+                }
+                countHigh++;
+
             }
             dist= dist-(speed*5);
             handler.postDelayed(this, 500);

@@ -17,7 +17,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Välkommen till Jogr! Här borde det stå något kul om appen! Kanske vad den används till och vad demoversionen erbjuder. Kanske också vad ett bra val av avstånd och sträcka är."
+        android:text="Välkommen till Jogr! \nDetta är en demo version och det som skiljer denna versionen från den riktiga är att vi simulerar att man springer genom manuell input. På detta vis kan ni enkelt testa konceptet av appen!"
         android:id="@+id/textView2"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"

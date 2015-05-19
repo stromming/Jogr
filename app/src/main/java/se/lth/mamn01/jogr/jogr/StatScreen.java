@@ -45,17 +45,17 @@ private LineGraphSeries<DataPoint> series;
 
         mSensorListener.setOnShakeListener(new ShakeEventListener.OnShakeListener() {
             public void onShakeForward(){
-                Toast.makeText(getApplicationContext(), "Forward!", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getApplicationContext(), "Forward!", Toast.LENGTH_SHORT).show();
             }
             public void onShakeBack(){
-                Toast.makeText(getApplicationContext(), "Back!", Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(getApplicationContext(), "Back!", Toast.LENGTH_SHORT).show();
             }
             public void onShakeLeft() {
-             Toast.makeText(getApplicationContext(), "Left!", Toast.LENGTH_SHORT).show();
+             //Toast.makeText(getApplicationContext(), "Left!", Toast.LENGTH_SHORT).show();
              cycleStatsLeft();
             }
             public void onShakeRight(){
-             Toast.makeText(getApplicationContext(), "Right!", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(getApplicationContext(), "Right!", Toast.LENGTH_SHORT).show();
              cycleStatsRight();
             }
         });

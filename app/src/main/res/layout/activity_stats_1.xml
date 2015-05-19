@@ -20,22 +20,27 @@
 
     <ImageView
 
-        android:layout_width="194dp"
-        android:layout_height="wrap_content"
+        android:layout_width="154dp"
+        android:layout_height="199dp"
         android:id="@+id/imageView"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.41"
         android:contentDescription="sandwich.png"
         android:src="@mipmap/sandwich"
         android:visibility="visible" />
 
     <Button
-        android:layout_width="219dp"
-        android:layout_height="wrap_content"
+        android:layout_width="192dp"
+        android:layout_height="67dp"
         android:text="Dela till facebook!"
         android:id="@+id/button_fb"
-        android:layout_weight="0.28"
         android:layout_gravity="center_horizontal"
         android:onClick="shareToFacebook"
         />
+
+    <ImageView
+        android:layout_width="99dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/plopp2" />
 </LinearLayout>

@@ -16,4 +16,19 @@
         android:text="You ran 5 km in 25 minutes. Well done!"
         android:id="@+id/text0"
         android:textSize="12pt" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="103dp"
+        android:layout_gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="99dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView3"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/plopp1" />
+    </RelativeLayout>
+
 </LinearLayout>

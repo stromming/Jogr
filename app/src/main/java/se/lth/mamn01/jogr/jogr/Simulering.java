@@ -78,9 +78,9 @@ public class Simulering extends Activity{
         targetDist = dist;
         time = Integer.parseInt(values[1]);
         mediumSpeed= dist/time;
-        TextView targetSpeed = (TextView)findViewById(R.id.target_speed);
-        targetSpeed.setText("Målhastighet: " +mediumSpeed);
-        System.out.println("Before loop "+dist+" : "+time);
+        //TextView targetSpeed = (TextView)findViewById(R.id.target_speed);
+        //targetSpeed.setText("Målhastighet: " +mediumSpeed);
+        //System.out.println("Before loop "+dist+" : "+time);
 
         bar = (ProgressBar) findViewById(R.id.progressBar1);
         bar.setVisibility(View.VISIBLE);

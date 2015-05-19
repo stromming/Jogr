@@ -14,4 +14,12 @@
         android:layout_height="200dip"
         android:id="@+id/graph" />
 
+    <ImageView
+        android:layout_width="99dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView4"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.5"
+        android:src="@mipmap/plopp3" />
+
 </LinearLayout>

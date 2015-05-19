@@ -13,6 +13,15 @@
         android:layout_gravity="center_horizontal"
          />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Din löprunda"
+        android:id="@+id/textView12"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.17" />
+
     <com.jjoe64.graphview.GraphView
         android:layout_width="match_parent"
         android:layout_height="200dip"
@@ -31,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/space"
-        android:layout_weight="0.79" />
+        android:layout_weight="0.66" />
 
     <RadioGroup
         android:layout_width="100dp"

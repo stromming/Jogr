@@ -23,10 +23,10 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="
-        Kalorier brända senaste veckan: 3287
-        Antal löprundor: 4
-        Antal personbästa: 2
-        Dagar kvar till ditt personliga mål: 132"
+        Kalorier brända senaste veckan: 3287 \n
+        Antal löprundor: 4 \n
+        Antal personbästa: 2 \n
+        Dagar kvar till ditt personliga mål: 132 \n"
         android:id="@+id/textView11"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.59" />

@@ -22,16 +22,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Kalorier brända senaste veckan: 3287 \n Antal löprundor: 4 \n Antal personbästa: 2 \n Sannolikhet att allt detta är påhittat: 97%"
+        android:text="
+        Kalorier brända senaste veckan: 3287 \n
+        Antal löprundor: 4 \n
+        Antal personbästa: 2 \n
+        Dagar kvar till ditt personliga mål: 132 \n"
         android:id="@+id/textView11"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.39" />
+        android:layout_weight="0.59" />
 
     <RadioGroup
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.17"
         android:orientation="horizontal" >
 
         <RadioButton

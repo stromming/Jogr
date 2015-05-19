@@ -13,6 +13,15 @@
         android:layout_gravity="center_horizontal"
          />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Din löprunda"
+        android:id="@+id/textView12"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.17" />
+
     <com.jjoe64.graphview.GraphView
         android:layout_width="match_parent"
         android:layout_height="200dip"
@@ -27,11 +36,16 @@
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.17" />
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/space"
+        android:layout_weight="0.66" />
+
     <RadioGroup
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.17"
         android:orientation="horizontal" >
 
         <RadioButton
@@ -62,13 +76,6 @@
             android:layout_weight="0.09"
             android:checked="true"/>
     </RadioGroup>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/space"
-        android:layout_weight="0.64"
-        android:layout_gravity="center_horizontal" />
 
     <Button
         android:layout_width="280dp"

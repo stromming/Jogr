@@ -26,14 +26,13 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Använd skakningar framåt, bakåt eller åt sidorna för att navigera statistikskärmarna"
         android:id="@+id/textView9"
-        android:layout_weight="0.49"
+        android:layout_weight="1.00"
         android:layout_gravity="center_horizontal" />
 
     <RadioGroup
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.42"
         android:orientation="horizontal" >
 
         <RadioButton

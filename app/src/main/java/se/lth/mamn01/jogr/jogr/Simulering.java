@@ -29,6 +29,11 @@ public class Simulering extends Activity{
     MediaPlayer playGoodSpeed;
     MediaPlayer playHighSpeed;
     MediaPlayer playLowSpeed;
+    MediaPlayer play100;
+    MediaPlayer play200;
+    MediaPlayer play300;
+    MediaPlayer play400;
+    MediaPlayer play500;
     int dist;
     int time;
     int speed;
@@ -43,6 +48,8 @@ public class Simulering extends Activity{
     long[] xValues;
     long[] yValues;
     boolean goodSpeed;
+    int kcalCounter = 0;
+    int kcalHelper = 0;
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -56,6 +63,14 @@ public class Simulering extends Activity{
         playGoodSpeed = MediaPlayer.create(this, R.raw.goodspeed);
         playHighSpeed = MediaPlayer.create(this,R.raw.highspeed);
         playLowSpeed = MediaPlayer.create(this,R.raw.lowspeed);
+       play100 = MediaPlayer.create(this,R.raw.one);
+        play200 = MediaPlayer.create(this,R.raw.two);
+        play300 = MediaPlayer.create(this,R.raw.three);
+
+        play400 = MediaPlayer.create(this,R.raw.four);
+
+        play500 = MediaPlayer.create(this,R.raw.five);
+
         Bundle extras = getIntent().getExtras();
         finishedButton = (Button)findViewById(R.id.button);
         finishedButton.setEnabled(false);
@@ -74,7 +89,7 @@ public class Simulering extends Activity{
         counter = 0;
         loop=true;
         timeStarted = System.currentTimeMillis();
-        dist = 100 * Integer.parseInt(values[0]);
+        dist = Integer.parseInt(values[0]);
         targetDist = dist;
         time = Integer.parseInt(values[1]);
         mediumSpeed= dist/time;
@@ -156,7 +171,26 @@ countGood = countGood%4;
             }
             dist= dist-(speed*2);
             bar.setProgress((int)(100-100*dist/(double)(targetDist)));
-
+kcalCounter += speed*2;
+            if(kcalCounter>1200){
+                kcalHelper++;
+                kcalCounter=0;
+                if(kcalHelper==1){
+                    play100.start();
+                }
+                else if(kcalHelper==2){
+                    play200.start();
+                }
+                else if(kcalHelper==3){
+                    play300.start();
+                }
+                else if(kcalHelper==4){
+                    play400.start();
+                }
+                else if(kcalHelper==5){
+                    play500.start();
+                }
+            }
 
 
             handler.postDelayed(this, 1850);

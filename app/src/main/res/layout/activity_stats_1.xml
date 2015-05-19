@@ -33,11 +33,16 @@
         android:src="@mipmap/sandwich"
         android:visibility="visible" />
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/space1000"
+        android:layout_weight="0.35" />
+
     <RadioGroup
         android:layout_width="100dp"
         android:layout_height="45dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.09"
         android:orientation="horizontal">
 
         <RadioButton
@@ -68,13 +73,6 @@
             android:enabled="true"
         android:layout_weight="0.09" />
     </RadioGroup>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/space1000"
-        android:layout_weight="0.29" />
 
     <Button
         android:layout_width="280dp"

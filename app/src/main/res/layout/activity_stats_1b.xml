@@ -16,16 +16,18 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="\n \n \n En skinkmacka innehåller traditionellt två delar macka och en del skinka. Enligt google translate heter skinkmacka ŝinko sandviĉo på esperanto"
+        android:text="
+
+\n\n\n\n
+        En skinkmacka innehåller traditionellt två delar macka och en del skinka. Enligt google translate heter skinkmacka ŝinko sandviĉo på esperanto"
         android:id="@+id/textView10"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.36" />
+        android:layout_weight="1.00" />
 
     <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.09"
         android:orientation="horizontal" >
 
         <RadioButton

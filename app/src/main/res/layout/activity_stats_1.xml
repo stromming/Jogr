@@ -4,10 +4,14 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.15" />
+    <Button
+        android:layout_width="280dp"
+        android:layout_height="45dp"
+        android:text="^ Dela till facebook! ^"
+        android:id="@+id/button_fb"
+        android:layout_gravity="center_horizontal"
+        android:clickable="false"
+        />
 
     <TextView
         android:layout_width="268dp"
@@ -20,27 +24,64 @@
 
     <ImageView
 
-        android:layout_width="154dp"
-        android:layout_height="199dp"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
         android:id="@+id/imageView"
         android:layout_gravity="center_horizontal"
+        android:layout_weight="0.41"
         android:contentDescription="sandwich.png"
         android:src="@mipmap/sandwich"
         android:visibility="visible" />
 
-    <Button
-        android:layout_width="192dp"
-        android:layout_height="67dp"
-        android:text="Dela till facebook!"
-        android:id="@+id/button_fb"
+    <RadioGroup
+        android:layout_width="100dp"
+        android:layout_height="45dp"
         android:layout_gravity="center_horizontal"
-        android:onClick="shareToFacebook"
-        />
+        android:layout_weight="0.09"
+        android:orientation="horizontal">
 
-    <ImageView
-        android:layout_width="99dp"
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="true"
+            android:clickable="false"
+            android:id="@+id/radioButton3"
+            android:layout_weight="0.09"
+            />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="true"
+            android:id="@+id/radioButton2"
+            android:clickable="false"
+            android:layout_gravity="right"
+            android:checked="true"
+            android:layout_weight="0.09" />
+
+        <RadioButton
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView2"
+            android:clickable="false"
+        android:id="@+id/radioButton"
         android:layout_gravity="center_horizontal"
-        android:src="@mipmap/plopp2" />
+            android:enabled="true"
+        android:layout_weight="0.09" />
+    </RadioGroup>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/space1000"
+        android:layout_weight="0.29" />
+
+    <Button
+        android:layout_width="280dp"
+        android:layout_height="45dp"
+        android:text="v  Mer information  v"
+        android:id="@+id/button8"
+        android:clickable="false"
+        android:layout_gravity="center_horizontal" />
+
 </LinearLayout>

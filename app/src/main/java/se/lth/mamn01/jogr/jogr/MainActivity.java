@@ -2,6 +2,7 @@ package se.lth.mamn01.jogr.jogr;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Handler;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -29,19 +30,14 @@ public class MainActivity extends Activity {
       setContentView(R.layout.activity_splash);
         ImageView iv = (ImageView)findViewById(R.id.imageView2);
         iv.setImageResource(R.drawable.jogr);
+        new Handler().postDelayed(new Runnable(){
+            @Override
+            public void run() {
+                setContentView(R.layout.activity_main);
+            }
+        }, 3000);
 
-        delayedSwitch();
     }
-public void delayedSwitch(){
-    try {
-        Thread.sleep(3000);
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-    }
-
-    setContentView(R.layout.activity_main);
-
-}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

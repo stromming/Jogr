@@ -27,11 +27,16 @@
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.17" />
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/space"
+        android:layout_weight="0.79" />
+
     <RadioGroup
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.17"
         android:orientation="horizontal" >
 
         <RadioButton
@@ -62,13 +67,6 @@
             android:layout_weight="0.09"
             android:checked="true"/>
     </RadioGroup>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/space"
-        android:layout_weight="0.64"
-        android:layout_gravity="center_horizontal" />
 
     <Button
         android:layout_width="280dp"

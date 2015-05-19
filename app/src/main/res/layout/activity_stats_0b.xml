@@ -24,16 +24,15 @@
         android:layout_width="267dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Skakningarna fungerar bäst om du håller mobilen rakt."
+        android:text="Dina senaste löprundor har varit 8.3% snabbare än föregående månad. Bravo!"
         android:id="@+id/textView9"
-        android:layout_weight="0.49"
+        android:layout_weight="1"
         android:layout_gravity="center_horizontal" />
 
     <RadioGroup
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.42"
         android:orientation="horizontal" >
 
         <RadioButton

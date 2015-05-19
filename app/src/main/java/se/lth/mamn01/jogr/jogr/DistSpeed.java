@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.Toast;
 
 
 public class DistSpeed extends ActionBarActivity {
@@ -52,13 +53,20 @@ public class DistSpeed extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
     public void nextPage(View view){
-
-        Intent intent = new Intent(this, Simulering.class);
         String distString = dist.getText().toString();
         int time = hPicker.getValue()* 3600+ minPicker.getValue()*60;
+        if(Integer.parseInt(distString)/time > 15){
+            Toast.makeText(getApplicationContext(), "Orimlig hastighet. Prova något lägre. t.ex. 400 meter på 1 minut.",
+                    Toast.LENGTH_LONG).show();
 
-        intent.putExtra("variables", distString +" "+time);
+        }
+        else {
+            Intent intent = new Intent(this, Simulering.class);
 
-        startActivity(intent);
+
+            intent.putExtra("variables", distString + " " + time);
+
+            startActivity(intent);
+        }
     }
 }

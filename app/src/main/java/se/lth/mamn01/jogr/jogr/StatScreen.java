@@ -10,9 +10,9 @@ import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,9 +27,11 @@ public class StatScreen extends Activity {
     private SensorManager mSensorManager;
     private GraphView graph;
     private ShakeEventListener mSensorListener;
-    private int statCycler = 0;
+    private int statCyclerX = 0;
+    private int statCyclerZ = 0;
     private int targetSpeed;
     private int targetDist;
+    private Vibrator vib;
 private LineGraphSeries<DataPoint> series;
     private LineGraphSeries<DataPoint> targetSeries;
     @Override
@@ -39,23 +41,23 @@ private LineGraphSeries<DataPoint> series;
 
         setContentView(R.layout.activity_stats_0);
 
-
+        vib =  (Vibrator) getSystemService(VIBRATOR_SERVICE);
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSensorListener = new ShakeEventListener();
 
         mSensorListener.setOnShakeListener(new ShakeEventListener.OnShakeListener() {
             public void onShakeForward(){
-                Toast.makeText(getApplicationContext(), "Forward!", Toast.LENGTH_SHORT).show();
+               cycleStatsForward();
             }
             public void onShakeBack(){
-                Toast.makeText(getApplicationContext(), "Back!", Toast.LENGTH_SHORT).show();
+                cycleStatsBack();
             }
             public void onShakeLeft() {
-             Toast.makeText(getApplicationContext(), "Left!", Toast.LENGTH_SHORT).show();
+                statCyclerZ = 0;
              cycleStatsLeft();
             }
             public void onShakeRight(){
-             Toast.makeText(getApplicationContext(), "Right!", Toast.LENGTH_SHORT).show();
+                statCyclerZ = 0;
              cycleStatsRight();
             }
         });
@@ -90,18 +92,43 @@ private LineGraphSeries<DataPoint> series;
         targetSeries.setColor(Color.RED);
         setLayout();
     }
+    public void cycleStatsForward(){
+        if(statCyclerZ==0){
+            vib.vibrate(100);
+            Toast.makeText(getApplicationContext(), "Delat!",
+                    Toast.LENGTH_SHORT).show();
+
+        }
+        else if(statCyclerZ == 1){
+            vib.vibrate(100);
+            statCyclerZ = 0;
+            setLayout();
+        }
+
+
+    }
+    public void cycleStatsBack(){
+        if(statCyclerZ == 0){
+            vib.vibrate(100);
+            statCyclerZ = 1;
+            setLayout();
+        }
+
+    }
 public void cycleStatsRight() {
-    statCycler++;
-    if (statCycler == 3) {
-        statCycler = 0;
+    vib.vibrate(100);
+    statCyclerX++;
+    if (statCyclerX == 3) {
+        statCyclerX = 0;
     }
     setLayout();
 }
 
     public void cycleStatsLeft(){
-        statCycler--;
-        if(statCycler == -1){
-            statCycler = 2;
+        vib.vibrate(100);
+        statCyclerX--;
+        if(statCyclerX == -1){
+            statCyclerX = 2;
         }
         setLayout();
     }
@@ -120,12 +147,19 @@ public void cycleStatsRight() {
         graph.getViewport().setScrollable(true);
     }
 public void setLayout(){
-    if(statCycler == 0){
-        setContentView(R.layout.activity_stats_0);
-        TextView text = (TextView) findViewById(R.id.text0);
-        text.setText("Du sprang " + targetDist + " meter på " + graphMaxX + " sekunder. Bra jobbat!");
+
+    if(statCyclerX == 0){
+        if(statCyclerZ==0) {
+            setContentView(R.layout.activity_stats_0);
+            TextView text = (TextView) findViewById(R.id.text0);
+            text.setText("Du sprang " + targetDist + " meter på " + graphMaxX + " sekunder. Bra jobbat!");
+        }
+        else if(statCyclerZ==1){
+            setContentView(R.layout.activity_stats_0b);
+        }
     }
-    if(statCycler == 1){
+    if(statCyclerX == 1){
+        if(statCyclerZ==0){
         setContentView(R.layout.activity_stats_1);
         TextView text = (TextView) findViewById(R.id.text1);
         int kcalBurned = 83*targetDist/1000;
@@ -146,9 +180,18 @@ public void setLayout(){
 
         text.setText("Du brände " + 83*targetDist/1000 + " kcal! Det är lika mycket som en " +comparison+ " skinkmacka!");
     }
-    if(statCycler == 2){
-        setContentView(R.layout.activity_stats_2);
-        reloadGraph();
+    else if (statCyclerZ ==1){
+            setContentView(R.layout.activity_stats_1b);
+        }
+    }
+    if(statCyclerX == 2){
+        if(statCyclerZ==0) {
+            setContentView(R.layout.activity_stats_2);
+            reloadGraph();
+        }
+        else if(statCyclerZ==1){
+            setContentView(R.layout.activity_stats_2b);
+        }
     }
 
 }

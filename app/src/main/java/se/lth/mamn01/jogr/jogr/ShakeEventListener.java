@@ -13,7 +13,9 @@ public class ShakeEventListener implements SensorEventListener {
 
     int direction = 0;
     /** Minimum movement force to consider. */
-    private static final int MIN_FORCE = 3;
+     private static final int MIN_FORCE_X = 3;
+    private static final int MIN_FORCE_Z = 4;
+
     private static final int MIN_TIME_BETWEEN_SHAKES = 500;
     /**
      * Minimum times in a shake gesture that the direction of movement needs to
@@ -86,11 +88,8 @@ public ShakeEventListener(){
         float totalMovementX = Math.abs(x - lastX);
         float totalMovementZ = Math.abs(z - lastZ);
 
-            if (totalMovementZ > MIN_FORCE){
 
-            }
-
-            if (totalMovementX > MIN_FORCE) {
+            if (totalMovementX > MIN_FORCE_X || totalMovementZ > MIN_FORCE_Z) {
 
             //För test
            // mShakeListener.onShake();
@@ -109,12 +108,26 @@ public ShakeEventListener(){
 
                 mFirstDirectionChangeTime = now;
                 mLastDirectionChangeTime = now;
-                if(x-lastX >= 0){
-                    direction = 1;
+                if (totalMovementX > MIN_FORCE_X){
+
+
+                    if(x-lastX >= 0){
+                        direction = 1;
+                    }
+                    else{
+                        direction = 2;
+                    }
                 }
-                else{
-                    direction = 2;
+                else if(totalMovementZ > MIN_FORCE_Z){
+                    if(z-lastZ >= 0){
+                        direction = 3;
+                    }
+                    else{
+                        direction = 4;
+                    }
                 }
+
+
             }
 
             // check if the last movement was not long ago
@@ -146,6 +159,14 @@ public ShakeEventListener(){
                         else if(direction == 2){
 
                             mShakeListener.onShakeLeft();
+                        }
+                        else if(direction == 4){
+
+                            mShakeListener.onShakeForward();
+                        }
+                        else if(direction == 3){
+
+                            mShakeListener.onShakeBack();
                         }
                         resetShakeParameters();
 

@@ -131,7 +131,7 @@ countGood = countGood%4;
                 yValues[counter] = speed;
                 loop=false;
             }else if(speed>= mediumSpeed-1 && speed<=(mediumSpeed+1)){
-                if(!goodSpeed) {
+                if(!goodSpeed && speed != 0) {
                     playGoodSpeed.start();
                     countHigh=0;
                     countLow=0;

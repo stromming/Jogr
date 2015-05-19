@@ -7,31 +7,25 @@
     <Button
         android:layout_width="280dp"
         android:layout_height="45dp"
-        android:text="^ Dela till facebook! ^"
-        android:id="@+id/button6"
-        android:clickable="false"
+        android:text="^ Tillbaka ^"
+        android:id="@+id/button10"
         android:layout_gravity="center_horizontal"
-         />
-
-    <com.jjoe64.graphview.GraphView
-        android:layout_width="match_parent"
-        android:layout_height="200dip"
-        android:id="@+id/graph" />
+        android:clickable="false" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Röd linje motsvarar din målhastighet"
-        android:id="@+id/textView8"
+        android:text="\n \n \n En skinkmacka innehåller traditionellt två delar macka och en del skinka. Enligt google translate heter skinkmacka ŝinko sandviĉo på esperanto"
+        android:id="@+id/textView10"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.17" />
+        android:layout_weight="0.36" />
 
     <RadioGroup
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.17"
+        android:layout_weight="0.09"
         android:orientation="horizontal" >
 
         <RadioButton
@@ -39,43 +33,26 @@
             android:layout_height="wrap_content"
             android:enabled="true"
             android:clickable="false"
-            android:id="@+id/radioButton4"
-            android:layout_weight="0.09"
-             />
+            android:id="@+id/radioButton10"
+            android:layout_weight="0.09" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:enabled="true"
-            android:id="@+id/radioButton5"
+            android:id="@+id/radioButton11"
             android:clickable="false"
             android:layout_gravity="right"
+            android:checked="true"
             android:layout_weight="0.09" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="false"
-            android:id="@+id/radioButton6"
+            android:id="@+id/radioButton12"
             android:layout_gravity="center_horizontal"
             android:enabled="true"
-            android:layout_weight="0.09"
-            android:checked="true"/>
+            android:layout_weight="0.09" />
     </RadioGroup>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/space"
-        android:layout_weight="0.64"
-        android:layout_gravity="center_horizontal" />
-
-    <Button
-        android:layout_width="280dp"
-        android:layout_height="45dp"
-        android:text="v  Mer information  v"
-        android:id="@+id/button9"
-        android:clickable="false"
-        android:layout_gravity="center_horizontal" />
-
 </LinearLayout>

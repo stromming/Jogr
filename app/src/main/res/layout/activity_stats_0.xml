@@ -12,6 +12,11 @@
         android:layout_gravity="center_horizontal"
         android:clickable="false" />
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal" />
+
     <TextView
         android:layout_width="284dp"
         android:layout_height="153dp"
@@ -24,7 +29,7 @@
         android:layout_width="267dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Använd skakningar framåt, bakåt eller åt sidorna för att navigera statistikskärmarna"
+        android:text="Använd skakningar framåt, bakåt eller åt sidorna för att navigera statistikskärmarna. \n Skakningarna fungerar bäst om telefonen är lodrät."
         android:id="@+id/textView9"
         android:layout_weight="1.00"
         android:layout_gravity="center_horizontal" />

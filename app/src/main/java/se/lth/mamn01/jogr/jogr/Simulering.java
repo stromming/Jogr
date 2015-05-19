@@ -74,7 +74,7 @@ public class Simulering extends Activity{
         counter = 0;
         loop=true;
         timeStarted = System.currentTimeMillis();
-        dist = 100 * Integer.parseInt(values[0]);
+        dist = Integer.parseInt(values[0]);
         targetDist = dist;
         time = Integer.parseInt(values[1]);
         mediumSpeed= dist/time;

@@ -152,7 +152,9 @@ public void setLayout(){
         if(statCyclerZ==0) {
             setContentView(R.layout.activity_stats_0);
             TextView text = (TextView) findViewById(R.id.text0);
-            text.setText("Du sprang " + targetDist + " meter på " + graphMaxX + " sekunder. Bra jobbat!");
+            TextView text3 = (TextView) findViewById(R.id.text3);
+            text.setText( targetDist + " Meter");
+            text3.setText(graphMaxX + " Sekunder");
         }
         else if(statCyclerZ==1){
             setContentView(R.layout.activity_stats_0b);

@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
 
       setContentView(R.layout.activity_splash);
         ImageView iv = (ImageView)findViewById(R.id.imageView2);
-        iv.setImageResource(R.drawable.jogr);
+        iv.setImageResource(R.drawable.splashny);
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {

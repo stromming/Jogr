@@ -16,10 +16,7 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="
-
-\n\n\n\n
-        En skinkmacka innehåller traditionellt två delar macka och en del skinka. Enligt google translate heter skinkmacka ŝinko sandviĉo på esperanto"
+        android:text="  \n\n\n\n         En skinkmacka innehåller traditionellt två delar macka och en del skinka. Enligt google translate heter skinkmacka ŝinko sandviĉo på esperanto"
         android:id="@+id/textView10"
         android:layout_gravity="center_horizontal"
         android:layout_weight="1.00" />

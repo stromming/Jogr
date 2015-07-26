@@ -13,15 +13,15 @@ public class ShakeEventListener implements SensorEventListener {
 
     int direction = 0;
     /** Minimum movement force to consider. */
-     private static final int MIN_FORCE_X = 3;
-    private static final int MIN_FORCE_Z = 4;
+     private static final int MIN_FORCE_X = 7;
+    private static final int MIN_FORCE_Z = 7;
 
     private static final int MIN_TIME_BETWEEN_SHAKES = 500;
     /**
      * Minimum times in a shake gesture that the direction of movement needs to
      * change.
      */
-    private static final int MIN_DIRECTION_CHANGE = 3;
+    private static final int MIN_DIRECTION_CHANGE = 2;
 
     /** Maximum pause between movements. */
     private static final int MAX_PAUSE_BETWEEN_DIRECTION_CHANGE = 200;
@@ -108,7 +108,15 @@ public ShakeEventListener(){
 
                 mFirstDirectionChangeTime = now;
                 mLastDirectionChangeTime = now;
-                if (totalMovementX > MIN_FORCE_X){
+                if(totalMovementZ > MIN_FORCE_Z){
+                    if(z-lastZ >= 0){
+                        direction = 3;
+                    }
+                    else{
+                        direction = 4;
+                    }
+                }
+                else if (totalMovementX > MIN_FORCE_X){
 
 
                     if(x-lastX >= 0){
@@ -118,14 +126,7 @@ public ShakeEventListener(){
                         direction = 2;
                     }
                 }
-                else if(totalMovementZ > MIN_FORCE_Z){
-                    if(z-lastZ >= 0){
-                        direction = 3;
-                    }
-                    else{
-                        direction = 4;
-                    }
-                }
+
 
 
             }

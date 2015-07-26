@@ -3,24 +3,15 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Avstånd (meter)"
-        android:id="@+id/textView6"
-        android:layout_above="@+id/editText5"
-        android:layout_centerHorizontal="true" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/editText5"
-        android:layout_above="@+id/button5"
+        android:layout_below="@+id/imageView4"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp" />
+        android:hint="Meter"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -32,51 +23,32 @@
         android:layout_marginBottom="50dp"
         android:onClick="nextPage" />
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Tid"
-        android:id="@+id/textView3"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editText99"
+        android:layout_alignTop="@+id/imageView4"
+        android:layout_alignLeft="@+id/editText5"
+        android:layout_alignStart="@+id/editText5"
+        android:hint="Minuter"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Timmar"
-        android:id="@+id/textView5"
-        android:layout_marginTop="42dp"
-        android:layout_below="@+id/textView3"
-        android:layout_alignLeft="@+id/hPicker"
-        android:layout_alignStart="@+id/hPicker" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Minuter"
-        android:id="@+id/textView7"
-        android:layout_alignTop="@+id/textView5"
-        android:layout_alignRight="@+id/minPicker"
-        android:layout_alignEnd="@+id/minPicker" />
-
-    <NumberPicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/minPicker"
-        android:layout_below="@+id/textView7"
-        android:layout_toRightOf="@+id/textView3"
-        android:layout_toEndOf="@+id/textView3"
-        android:layout_marginTop="54dp" />
-
-    <NumberPicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/hPicker"
-        android:layout_alignTop="@+id/minPicker"
+    <ImageView
+        android:layout_width="210dp"
+        android:layout_height="150dp"
+        android:id="@+id/imageView4"
+        android:background="@mipmap/ruler"
+        android:layout_centerVertical="true"
         android:layout_alignLeft="@+id/editText5"
         android:layout_alignStart="@+id/editText5" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageView3"
+        android:background="@mipmap/time"
+        android:layout_above="@+id/editText99"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

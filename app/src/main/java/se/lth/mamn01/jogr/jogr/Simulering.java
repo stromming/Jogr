@@ -19,6 +19,7 @@ import android.widget.NumberPicker;
 import android.media.MediaPlayer;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Filip on 2015-04-21.
@@ -40,7 +41,7 @@ public class Simulering extends Activity implements LocationListener{
     MediaPlayer play500;
     int dist;
     int time;
-    int speed;
+    int speed = 0;
     int countGood,countLow,countHigh;
     int mediumSpeed;
     boolean loop;
@@ -78,6 +79,7 @@ public class Simulering extends Activity implements LocationListener{
         play500 = MediaPlayer.create(this,R.raw.five);
 
         Bundle extras = getIntent().getExtras();
+
         finishedButton = (Button)findViewById(R.id.button);
         finishedButton.setEnabled(false);
         countGood=0;
@@ -131,7 +133,10 @@ countGood = countGood%4;
             countHigh=countHigh%4;
       /* do what you need to do */
             prevSpeed = speed;
-            speed = (int) location.getSpeed();
+
+            if(location != null) {
+                speed = (int) location.getSpeed();
+            }
 
             if(prevSpeed != speed){
                 long diagX = System.currentTimeMillis() - timeStarted;
@@ -232,7 +237,9 @@ kcalCounter += speed*2;
     @Override
     public void onLocationChanged(Location location) {
         this.location=location;
-    }
+        if(location!=null){
+        Toast.makeText(getBaseContext(), String.valueOf(location.getSpeed()), Toast.LENGTH_LONG).show();
+    }}
 
     @Override
     public void onStatusChanged(String s, int i, Bundle bundle) {

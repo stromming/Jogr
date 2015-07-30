@@ -1,7 +1,11 @@
 package se.lth.mamn01.jogr.jogr;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -19,7 +23,7 @@ import android.widget.TextView;
 /**
  * Created by Filip on 2015-04-21.
  */
-public class Simulering extends Activity{
+public class Simulering extends Activity implements LocationListener{
     long timeStarted;
     NumberPicker speedPicker;
     String[] values;
@@ -50,6 +54,8 @@ public class Simulering extends Activity{
     boolean goodSpeed;
     int kcalCounter = 0;
     int kcalHelper = 0;
+    Location location;
+
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -63,7 +69,7 @@ public class Simulering extends Activity{
         playGoodSpeed = MediaPlayer.create(this, R.raw.goodspeed);
         playHighSpeed = MediaPlayer.create(this,R.raw.highspeed);
         playLowSpeed = MediaPlayer.create(this,R.raw.lowspeed);
-       play100 = MediaPlayer.create(this,R.raw.one);
+        play100 = MediaPlayer.create(this,R.raw.one);
         play200 = MediaPlayer.create(this,R.raw.two);
         play300 = MediaPlayer.create(this,R.raw.three);
 
@@ -105,6 +111,11 @@ public class Simulering extends Activity{
 
         handler = new Handler();
 
+        LocationManager lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+
+        this.onLocationChanged(null);
+
         handler.postDelayed(runnable, 100);
 
 
@@ -120,7 +131,7 @@ countGood = countGood%4;
             countHigh=countHigh%4;
       /* do what you need to do */
             prevSpeed = speed;
-            speed=speedPicker.getValue();
+            speed = (int) location.getSpeed();
 
             if(prevSpeed != speed){
                 long diagX = System.currentTimeMillis() - timeStarted;
@@ -216,5 +227,25 @@ kcalCounter += speed*2;
         intent.putExtra("yValues", yValues);
         intent.putExtra("targetDist", targetDist);
         startActivity(intent);
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        this.location=location;
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
     }
 }

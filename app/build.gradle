@@ -6,8 +6,8 @@ android {
 
     defaultConfig {
         applicationId "se.lth.mamn01.jogr.jogr"
-        minSdkVersion 15
-        targetSdkVersion 21
+        minSdkVersion 14
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
@@ -22,5 +22,5 @@ android {
 dependencies {
     compile 'com.jjoe64:graphview:4.0.1'
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.0.0'
+    compile 'com.android.support:appcompat-v7:22.2.1'
 }

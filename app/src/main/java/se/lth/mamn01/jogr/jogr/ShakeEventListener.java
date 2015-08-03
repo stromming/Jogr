@@ -13,7 +13,7 @@ public class ShakeEventListener implements SensorEventListener {
 
     int direction = 0;
     /** Minimum movement force to consider. */
-     private static final int MIN_FORCE_X = 7;
+     private static final int MIN_FORCE_X = 5;
     private static final int MIN_FORCE_Z = 7;
 
     private static final int MIN_TIME_BETWEEN_SHAKES = 500;
@@ -86,10 +86,10 @@ public ShakeEventListener(){
 
         // calculate movement
         float totalMovementX = Math.abs(x - lastX);
-        float totalMovementZ = Math.abs(z - lastZ);
+       // float totalMovementZ = Math.abs(z - lastZ);
 
 
-            if (totalMovementX > MIN_FORCE_X || totalMovementZ > MIN_FORCE_Z) {
+            if (totalMovementX > MIN_FORCE_X) {
 
             //För test
            // mShakeListener.onShake();
@@ -108,15 +108,15 @@ public ShakeEventListener(){
 
                 mFirstDirectionChangeTime = now;
                 mLastDirectionChangeTime = now;
-                if(totalMovementZ > MIN_FORCE_Z){
+                /*if(totalMovementZ > MIN_FORCE_Z){
                     if(z-lastZ >= 0){
                         direction = 3;
                     }
                     else{
                         direction = 4;
                     }
-                }
-                else if (totalMovementX > MIN_FORCE_X){
+                }*/
+                if (totalMovementX > MIN_FORCE_X){
 
 
                     if(x-lastX >= 0){
@@ -170,12 +170,14 @@ public ShakeEventListener(){
                             mShakeListener.onShakeBack();
                         }
                         resetShakeParameters();
+                        //lastZ = se.values[2];
 
                     }
                 }
 
             } else {
                 resetShakeParameters();
+               // lastZ = se.values[2];
             }
         }
     }
@@ -189,7 +191,7 @@ public ShakeEventListener(){
         mLastDirectionChangeTime = 0;
         lastX = 0;
         lastY = 0;
-        lastZ = 0;
+
         direction = 0;
     }
 

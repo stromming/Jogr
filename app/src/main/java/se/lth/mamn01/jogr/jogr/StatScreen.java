@@ -9,6 +9,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.location.GpsSatellite;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.Menu;
@@ -38,10 +39,8 @@ private LineGraphSeries<DataPoint> series;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         setContentView(R.layout.activity_stats_0);
-
-        vib =  (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        vib = (Vibrator)getSystemService(VIBRATOR_SERVICE);
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSensorListener = new ShakeEventListener();
 

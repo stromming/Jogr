@@ -6,8 +6,8 @@ android {
 
     defaultConfig {
         applicationId "se.lth.mamn01.jogr.jogr"
-        minSdkVersion 15
-        targetSdkVersion 21
+        minSdkVersion 14
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }

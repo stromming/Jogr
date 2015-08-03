@@ -4,15 +4,6 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <Button
-        android:layout_width="280dp"
-        android:layout_height="45dp"
-        android:text="^ Dela till facebook! ^"
-        android:id="@+id/button_fb"
-        android:layout_gravity="center_horizontal"
-        android:clickable="false"
-        />
-
     <TextView
         android:layout_width="268dp"
         android:layout_height="wrap_content"
@@ -73,13 +64,5 @@
             android:enabled="true"
         android:layout_weight="0.09" />
     </RadioGroup>
-
-    <Button
-        android:layout_width="280dp"
-        android:layout_height="45dp"
-        android:text="v  Mer information  v"
-        android:id="@+id/button8"
-        android:clickable="false"
-        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

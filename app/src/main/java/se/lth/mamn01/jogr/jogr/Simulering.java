@@ -1,11 +1,13 @@
 package se.lth.mamn01.jogr.jogr;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -55,6 +57,7 @@ public class Simulering extends Activity implements LocationListener{
     boolean goodSpeed;
     int kcalCounter = 0;
     int kcalHelper = 0;
+    int newSpeed;
     Location location;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,18 @@ public class Simulering extends Activity implements LocationListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simulering);
        // checkbox = (CheckBox)this.findViewById(R.id.checkBox);
+
+        //Media Button Receiver
+
+        MediaButtonReceiver mb = new MediaButtonReceiver();
+        mb.attach(this);
+
+        AudioManager am = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+
+        am.registerMediaButtonEventReceiver(new ComponentName(getPackageName(), MediaButtonReceiver.class.getName()));
+
+        //
+
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         speedPicker = (NumberPicker)findViewById(R.id.numberPicker);
         speedPicker.setMaxValue(15);
@@ -129,7 +144,7 @@ public class Simulering extends Activity implements LocationListener{
         @Override
         public void run() {
             countLow=countLow%4;
-countGood = countGood%4;
+            countGood = countGood%4;
             countHigh=countHigh%4;
       /* do what you need to do */
             prevSpeed = speed;
@@ -253,6 +268,21 @@ kcalCounter += speed*2;
 
     @Override
     public void onProviderDisabled(String s) {
+
+    }
+
+    public void setNewSpeed(){
+        String text;
+        if(location != null) {
+            text="New speed: ";
+            newSpeed = (int) location.getSpeed();
+            mediumSpeed=newSpeed;
+        }else{
+            text="Error";
+        }
+
+        Toast toast = Toast.makeText(getApplicationContext(), text+newSpeed, Toast.LENGTH_SHORT);
+
 
     }
 }

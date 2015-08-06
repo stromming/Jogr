@@ -1,26 +1,49 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#ff171717"
+    >
 
 <Button
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="OK!"
+        android:layout_width="160dp"
+        android:layout_height="75dp"
+        android:text="Ny runda"
         android:id="@+id/button3"
 
     android:onClick="distSpeed"
         android:clickable="true"
-    android:layout_marginBottom="55dp"
+    android:textSize="20dp"
     android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true" />
+    android:layout_centerHorizontal="true"
+    android:layout_marginBottom="63dp" />
+
+    <ImageView
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:id="@+id/imageView7"
+        android:src="@mipmap/logo"
+        android:layout_above="@+id/textView3"
+        android:layout_alignLeft="@+id/button3"
+        android:layout_alignStart="@+id/button3"
+        android:layout_marginBottom="58dp" />
 
     <TextView
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Välkommen till Jogr! \nDetta är en demoversion. Det som skiljer denna versionen från den riktiga är att vi simulerar att man springer genom manuell input. På detta vis kan ni enkelt testa konceptet av appen!"
+        android:text="Välkommen till"
         android:id="@+id/textView2"
-        android:layout_alignParentTop="true"
+        android:textSize="30dp"
+        android:layout_above="@+id/imageView7"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Träningsappen som hjälper dig att någ dina mål"
+        android:id="@+id/textView3"
+        android:textSize="13dp"
+        android:layout_above="@+id/button3"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="118dp" />
+        android:layout_marginBottom="49dp" />
 
 </RelativeLayout>

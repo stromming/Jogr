@@ -9,14 +9,10 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.os.Handler;
-import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.media.MediaPlayer;
 import android.widget.ProgressBar;
@@ -59,11 +55,13 @@ public class Simulering extends Activity implements LocationListener{
     int kcalHelper = 0;
     int newSpeed;
     Location location;
+    TextView currentSpeed;
 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simulering);
+
        // checkbox = (CheckBox)this.findViewById(R.id.checkBox);
 
         //Media Button Receiver
@@ -78,9 +76,6 @@ public class Simulering extends Activity implements LocationListener{
         //
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        speedPicker = (NumberPicker)findViewById(R.id.numberPicker);
-        speedPicker.setMaxValue(15);
-        speedPicker.setMinValue(0);
         playFinish = MediaPlayer.create(this, R.raw.finish);
         playGoodSpeed = MediaPlayer.create(this, R.raw.goodspeed);
         playHighSpeed = MediaPlayer.create(this,R.raw.highspeed);
@@ -116,9 +111,11 @@ public class Simulering extends Activity implements LocationListener{
         targetDist = dist;
         time = Integer.parseInt(values[1]);
         mediumSpeed= dist/time;
-        //TextView targetSpeed = (TextView)findViewById(R.id.target_speed);
-        //targetSpeed.setText("Målhastighet: " +mediumSpeed);
-        //System.out.println("Before loop "+dist+" : "+time);
+
+
+//       TextView targetSpeed = (TextView)findViewById(R.id.target_speed);
+//       targetSpeed.setText("Målhastighet: " +mediumSpeed);
+//       System.out.println("Before loop "+dist+" : "+time);
 
         bar = (ProgressBar) findViewById(R.id.progressBar1);
         bar.setVisibility(View.VISIBLE);
@@ -134,6 +131,8 @@ public class Simulering extends Activity implements LocationListener{
         this.onLocationChanged(null);
 
         handler.postDelayed(runnable, 100);
+        TextView currentSpeed = (TextView)findViewById(R.id.speed1);
+
 
 
 
@@ -150,7 +149,18 @@ public class Simulering extends Activity implements LocationListener{
             prevSpeed = speed;
 
             if(location != null) {
+
                 speed = (int) location.getSpeed();
+//                misstänker att man behöver använda handlern på något sätt, har inte fått det att funka än
+//                currentSpeed.setText(speed);
+//                TextView currentTime = (TextView)findViewById(R.id.time1);
+//                int cTime = (int) (System.currentTimeMillis() - timeStarted)/1000;
+//                currentTime.setText(cTime);
+//                TextView currentMeter = (TextView)findViewById(R.id.meter1);
+//                int cMeter = cTime * speed;
+//                currentMeter.setText(cMeter);
+
+
             }
 
             if(prevSpeed != speed){

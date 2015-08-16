@@ -27,10 +27,10 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-      setContentView(R.layout.activity_splash);
-        ImageView iv = (ImageView)findViewById(R.id.imageView2);
+        setContentView(R.layout.activity_splash);
+        ImageView iv = (ImageView) findViewById(R.id.imageView2);
         iv.setImageResource(R.drawable.splashny);
-        new Handler().postDelayed(new Runnable(){
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 setContentView(R.layout.activity_main);
@@ -61,9 +61,9 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
- public void distSpeed(View view){
-     Intent intent = new Intent(this, DistSpeed.class);
-     startActivity(intent);
+    public void distSpeed(View view) {
+        Intent intent = new Intent(this, DistSpeed.class);
+        startActivity(intent);
     }
 
 }

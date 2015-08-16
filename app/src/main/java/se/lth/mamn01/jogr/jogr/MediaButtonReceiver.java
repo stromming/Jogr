@@ -1,54 +1,46 @@
 package se.lth.mamn01.jogr.jogr;
 
-        import android.content.BroadcastReceiver;
-        import android.content.Context;
-        import android.content.Intent;
-        import android.util.Log;
-        import android.view.KeyEvent;
-        import android.widget.Toast;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.widget.Toast;
 
 /**
  * Created by Filip on 2015-07-26.
  */
 public class MediaButtonReceiver extends BroadcastReceiver {
 
-    private KeyEvent event;
-    private OnPressListener mListener;
-
     public MediaButtonReceiver() {
         super();
 
     }
 
-    public interface OnPressListener {
-        /**
-         * Called when press is detected.
-         */
-        public void onMediaButtonPress();
-
-        void mkToast();
-    }
-
-    public void setOnPressListener(OnPressListener listener) {
-        mListener = listener;
-    }
-
-
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        //Toast toast = Toast.makeText(context, "test", Toast.LENGTH_SHORT);
-       mListener.mkToast();
-        Log.d("TEST","OK1");
+
+        KeyEvent keyEvent = intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT);
+
+
+        Log.d("Buttonreceiver", "Keyevent: " +keyEvent.toString());
         if (Intent.ACTION_MEDIA_BUTTON.equals(intent.getAction())) {
+            if (keyEvent != null) {
+                if (keyEvent.getAction() == KeyEvent.ACTION_UP) {
+                    SharedPreferences prefs = context.getSharedPreferences("myPrefs",
+                            Context.MODE_MULTI_PROCESS);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    if(prefs.getBoolean("flag", false)){
+                        editor.putBoolean("flag", false);
+                        editor.apply();
+                    }
 
-          //  KeyEvent event = (KeyEvent) intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT);
+                    editor.putBoolean("flag", true);
+                    editor.apply();
 
-
-
-            if (KeyEvent.KEYCODE_HEADSETHOOK == event.getKeyCode()) {
-                mListener.onMediaButtonPress();
-            //    toast.show();
+                }
             }
         }
 

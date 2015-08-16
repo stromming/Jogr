@@ -4,30 +4,30 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.os.Handler;
-import android.widget.NumberPicker;
 import android.media.MediaPlayer;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by Filip on 2015-04-21.
  */
-public class Simulering extends Activity implements LocationListener {
+public class Simulering extends Activity implements LocationListener, SharedPreferences.OnSharedPreferenceChangeListener {
     long timeStarted;
-    NumberPicker speedPicker;
     String[] values;
     Handler handler;
-    // CheckBox checkbox;
+AudioManager am;
     MediaPlayer playFinish;
     MediaPlayer playGoodSpeed;
     MediaPlayer playHighSpeed;
@@ -55,38 +55,28 @@ public class Simulering extends Activity implements LocationListener {
     int kcalHelper = 0;
     Location location;
     TextView currentSpeedView;
-    private MediaButtonReceiver mMediaReceiver;
     private TextView currentTimeView;
     private TextView currentMeterView;
     private long lastTick;
+
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simulering);
+        getSharedPreferences("myPrefs",
+                Context.MODE_MULTI_PROCESS).registerOnSharedPreferenceChangeListener(this);
 
-
-        AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-
-        am.registerMediaButtonEventReceiver(new ComponentName(getPackageName(), MediaButtonReceiver.class.getName()));
-
-        mMediaReceiver = new MediaButtonReceiver();
-        mMediaReceiver.setOnPressListener(new MediaButtonReceiver.OnPressListener() {
-            public void onMediaButtonPress() {
-                updateGoalSpeed();
-            }
-            public void mkToast(){
-                Toast.makeText(getBaseContext(), "MBR!", Toast.LENGTH_LONG).show();
-            }
-
-        });
-
-         currentTimeView = (TextView)findViewById(R.id.time1);
-         currentMeterView = (TextView)findViewById(R.id.meter1);
-        currentSpeedView = (TextView)findViewById(R.id.speed1);
+        currentTimeView = (TextView) findViewById(R.id.time1);
+        currentMeterView = (TextView) findViewById(R.id.meter1);
+        currentSpeedView = (TextView) findViewById(R.id.speed1);
 
         currentSpeedView.setText("0");
         currentTimeView.setText("00:00");
         currentMeterView.setText("0");
+         am = (AudioManager)getSystemService(AUDIO_SERVICE);
+
+        am.registerMediaButtonEventReceiver(new ComponentName(getPackageName(), MediaButtonReceiver.class.getName()));
+
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         playFinish = MediaPlayer.create(this, R.raw.finish);
@@ -124,7 +114,10 @@ public class Simulering extends Activity implements LocationListener {
         targetDist = distRemaining;
         time = Integer.parseInt(values[1]);
         goalSpeed = distRemaining / time;
-
+        SharedPreferences.Editor editor = getSharedPreferences("myPrefs",
+                Context.MODE_MULTI_PROCESS).edit();
+        editor.putBoolean("flag", false);
+        editor.apply();
         bar = (ProgressBar) findViewById(R.id.progressBar1);
         bar.setVisibility(View.VISIBLE);
         bar.setScaleY(3.0f);
@@ -136,16 +129,10 @@ public class Simulering extends Activity implements LocationListener {
         LocationManager lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
-        this.onLocationChanged(null);
         lastTick = System.currentTimeMillis();
         handler.postDelayed(runnable, 100);
 
 
-    }
-
-    private void updateGoalSpeed() {
-        Toast.makeText(getBaseContext(), "Update speed!", Toast.LENGTH_LONG).show();
-        goalSpeed = prevSpeed;
     }
 
 
@@ -160,29 +147,41 @@ public class Simulering extends Activity implements LocationListener {
 
             if (location != null) {
 
-                speed =  location.getSpeed();
+                speed = location.getSpeed();
                 currentSpeedView.setText(String.valueOf(speed));
-                int cTime = (int) (System.currentTimeMillis() - timeStarted)/1000;
-                int min = cTime/60;
-                int sec = cTime%60;
-                currentTimeView.setText(String.valueOf(min) + ":" + String.valueOf(sec));
-               
-                currentMeterView.setText(String.valueOf(targetDist- distRemaining));
+                int cTime = (int) (System.currentTimeMillis() - timeStarted) / 1000;
+                int min = (cTime / 60);
+                int sec = (cTime % 60);
+                String minString;
+                String secString;
+                if(min<10) {
+                    minString = "0" + String.valueOf(min);
+                }
+                else{
+                    minString = String.valueOf(min);
+
+                }
+                if(sec<10){
+                    secString = "0" +String.valueOf(sec);
+                }
+                else{
+                    secString = String.valueOf(sec);
+                }
+                currentTimeView.setText(minString + ":" + secString);
+
+                currentMeterView.setText(String.valueOf(targetDist - distRemaining));
 
 
             }
 
-                //Aadd new information for the Stat Screen diagram.
+            //Aadd new information for the Stat Screen diagram.
 
-                long diagX = System.currentTimeMillis() - timeStarted;
-                float diagY = speed;
-                xValues[counter] = diagX;
-                yValues[counter] = diagY;
-                System.out.println(diagX);
-                System.out.println(diagY);
+            long diagX = System.currentTimeMillis() - timeStarted;
+            float diagY = speed;
+            xValues[counter] = diagX;
+            yValues[counter] = diagY;
 
-                counter++;
-
+            counter++;
 
 
             if (loop) {
@@ -205,14 +204,14 @@ public class Simulering extends Activity implements LocationListener {
                     }
 
                 } else if (speed < goalSpeed) {
-                    if (countLow == 0) {
+                    if (countLow == 10) {
                         playLowSpeed.start();
                         countHigh = 0;
                         goodSpeed = false;
                     }
                     countLow++;
                 } else {
-                    if (countHigh == 0) {
+                    if (countHigh == 10) {
                         playHighSpeed.start();
                         goodSpeed = false;
                         countLow = 0;
@@ -220,10 +219,10 @@ public class Simulering extends Activity implements LocationListener {
                     countHigh++;
 
                 }
-                double tickTime = (System.currentTimeMillis()-lastTick)/1000.0;
+                double tickTime = (System.currentTimeMillis() - lastTick) / 1000.0;
                 //Toast.makeText(getBaseContext(), "Tick time: " + String.valueOf(tickTime), Toast.LENGTH_LONG).show();
                 lastTick = System.currentTimeMillis();
-                distRemaining = distRemaining - (int)(speed * tickTime);
+                distRemaining = distRemaining - (int) (speed * tickTime);
                 bar.setProgress((int) (100 - 100 * distRemaining / (double) (targetDist)));
 
                 kcalCounter += speed * tickTime;
@@ -254,10 +253,12 @@ public class Simulering extends Activity implements LocationListener {
     @Override
     protected void onPause() {
         super.onPause();
+        /*
         playFinish.release();
         playGoodSpeed.release();
         playHighSpeed.release();
         playLowSpeed.release();
+        */
     }
 
     public void nextPage(View view) {
@@ -272,9 +273,6 @@ public class Simulering extends Activity implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         this.location = location;
-        if (location != null) {
-            //Toast.makeText(getBaseContext(), String.valueOf(location.getSpeed()), Toast.LENGTH_LONG).show();
-        }
     }
 
     @Override
@@ -293,4 +291,20 @@ public class Simulering extends Activity implements LocationListener {
     }
 
 
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        playGoodSpeed.stop();
+        playHighSpeed.stop();
+        playLowSpeed.stop();
+        am.playSoundEffect(AudioManager.FX_KEY_CLICK, 0.5f);
+        if (sharedPreferences.getBoolean("flag", true)) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+
+            editor.putBoolean("flag", false);
+            editor.apply();
+            goalSpeed = prevSpeed;
+            Log.d("Simulering", "goal speed changed");
+        }
+    }
 }

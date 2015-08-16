@@ -12,8 +12,10 @@ import android.hardware.SensorEventListener;
 public class ShakeEventListener implements SensorEventListener {
 
     int direction = 0;
-    /** Minimum movement force to consider. */
-     private static final int MIN_FORCE_X = 5;
+    /**
+     * Minimum movement force to consider.
+     */
+    private static final int MIN_FORCE_X = 5;
     private static final int MIN_FORCE_Z = 7;
 
     private static final int MIN_TIME_BETWEEN_SHAKES = 500;
@@ -23,40 +25,57 @@ public class ShakeEventListener implements SensorEventListener {
      */
     private static final int MIN_DIRECTION_CHANGE = 2;
 
-    /** Maximum pause between movements. */
+    /**
+     * Maximum pause between movements.
+     */
     private static final int MAX_PAUSE_BETWEEN_DIRECTION_CHANGE = 200;
 
-    /** Maximum allowed time for shake gesture. */
+    /**
+     * Maximum allowed time for shake gesture.
+     */
     private static final int MAX_TOTAL_DURATION_OF_SHAKE = 400;
 
-    /** Time when the gesture started. */
+    /**
+     * Time when the gesture started.
+     */
     private long mFirstDirectionChangeTime = 0;
 
-    /** Time when the last movement started. */
+    /**
+     * Time when the last movement started.
+     */
     private long mLastDirectionChangeTime;
 
-    /** How many movements are considered so far. */
+    /**
+     * How many movements are considered so far.
+     */
     private int mDirectionChangeCount = 0;
 
-    /** The last x position. */
+    /**
+     * The last x position.
+     */
     private float lastX = 0;
 
-    /** The last y position. */
+    /**
+     * The last y position.
+     */
     private float lastY = 0;
 
-    /** The last z position. */
+    /**
+     * The last z position.
+     */
     private float lastZ = 0;
 
     private long blockTime = 0;
-    /** OnShakeListener that is called when shake is detected. */
+    /**
+     * OnShakeListener that is called when shake is detected.
+     */
     private OnShakeListener mShakeListener;
 
 
+    public ShakeEventListener() {
 
+    }
 
-public ShakeEventListener(){
-
-}
     /**
      * Interface for shake gesture.
      */
@@ -65,8 +84,11 @@ public ShakeEventListener(){
          * Called when shake gesture is detected.
          */
         void onShakeLeft();
+
         void onShakeRight();
+
         void onShakeForward();
+
         void onShakeBack();
     }
 
@@ -75,7 +97,7 @@ public ShakeEventListener(){
     }
 
 
-//Denna kod verkar köras även när sensorn inte ändras. Spelar dock ingen roll, så länge vi läser av värdena på accelerometern.
+    //Denna kod verkar köras även när sensorn inte ändras. Spelar dock ingen roll, så länge vi läser av värdena på accelerometern.
     @Override
     public void onSensorChanged(SensorEvent se) {
         // get sensor data
@@ -86,15 +108,14 @@ public ShakeEventListener(){
 
         // calculate movement
         float totalMovementX = Math.abs(x - lastX);
-       // float totalMovementZ = Math.abs(z - lastZ);
+        // float totalMovementZ = Math.abs(z - lastZ);
 
 
-            if (totalMovementX > MIN_FORCE_X) {
+        if (totalMovementX > MIN_FORCE_X) {
 
             //För test
-           // mShakeListener.onShake();
-           // resetShakeParameters();
-
+            // mShakeListener.onShake();
+            // resetShakeParameters();
 
 
             // get time
@@ -102,7 +123,7 @@ public ShakeEventListener(){
 
             // store first movement time
             if (mFirstDirectionChangeTime == 0) {
-                if(System.currentTimeMillis()-blockTime <= MIN_TIME_BETWEEN_SHAKES){
+                if (System.currentTimeMillis() - blockTime <= MIN_TIME_BETWEEN_SHAKES) {
                     return;
                 }
 
@@ -116,17 +137,15 @@ public ShakeEventListener(){
                         direction = 4;
                     }
                 }*/
-                if (totalMovementX > MIN_FORCE_X){
+                if (totalMovementX > MIN_FORCE_X) {
 
 
-                    if(x-lastX >= 0){
+                    if (x - lastX >= 0) {
                         direction = 1;
-                    }
-                    else{
+                    } else {
                         direction = 2;
                     }
                 }
-
 
 
             }
@@ -153,19 +172,16 @@ public ShakeEventListener(){
 
                         blockTime = System.currentTimeMillis();
 
-                        if(direction == 1) {
+                        if (direction == 1) {
 
                             mShakeListener.onShakeRight();
-                        }
-                        else if(direction == 2){
+                        } else if (direction == 2) {
 
                             mShakeListener.onShakeLeft();
-                        }
-                        else if(direction == 4){
+                        } else if (direction == 4) {
 
                             mShakeListener.onShakeForward();
-                        }
-                        else if(direction == 3){
+                        } else if (direction == 3) {
 
                             mShakeListener.onShakeBack();
                         }
@@ -177,7 +193,7 @@ public ShakeEventListener(){
 
             } else {
                 resetShakeParameters();
-               // lastZ = se.values[2];
+                // lastZ = se.values[2];
             }
         }
     }

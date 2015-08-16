@@ -33,31 +33,35 @@ public class StatScreen extends Activity {
     private int targetSpeed;
     private int targetDist;
     private Vibrator vib;
-private LineGraphSeries<DataPoint> series;
+    private LineGraphSeries<DataPoint> series;
     private LineGraphSeries<DataPoint> targetSeries;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_stats_0);
-        vib = (Vibrator)getSystemService(VIBRATOR_SERVICE);
+        vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSensorListener = new ShakeEventListener();
 
         mSensorListener.setOnShakeListener(new ShakeEventListener.OnShakeListener() {
-            public void onShakeForward(){
-               cycleStatsForward();
+            public void onShakeForward() {
+                cycleStatsForward();
             }
-            public void onShakeBack(){
+
+            public void onShakeBack() {
                 cycleStatsBack();
             }
+
             public void onShakeLeft() {
                 statCyclerZ = 0;
-             cycleStatsLeft();
+                cycleStatsLeft();
             }
-            public void onShakeRight(){
+
+            public void onShakeRight() {
                 statCyclerZ = 0;
-             cycleStatsRight();
+                cycleStatsRight();
             }
         });
 
@@ -69,8 +73,8 @@ private LineGraphSeries<DataPoint> series;
         targetSpeed = extras.getInt("targetSpeed");
         targetDist = extras.getInt("targetDist");
         int entries = 0;
-        for(int i = 0; i< xValues.length; i++){
-            if (xValues[i] == 0){
+        for (int i = 0; i < xValues.length; i++) {
+            if (xValues[i] == 0) {
                 entries = i;
                 break;
             }
@@ -78,13 +82,13 @@ private LineGraphSeries<DataPoint> series;
 
         DataPoint[] points = new DataPoint[entries];
 
-        for(int i = 0; i<entries; i++){
-            points[i] = new DataPoint(xValues[i]/1000, yValues[i]);
+        for (int i = 0; i < entries; i++) {
+            points[i] = new DataPoint(xValues[i] / 1000, yValues[i]);
 
         }
-        graphMaxX = (int) (xValues[entries-1]/1000);
+        graphMaxX = (int) (xValues[entries - 1] / 1000);
         DataPoint[] targetPoints = new DataPoint[2];
-        targetPoints[0]= new DataPoint(0,targetSpeed);
+        targetPoints[0] = new DataPoint(0, targetSpeed);
         targetPoints[1] = new DataPoint(graphMaxX, targetSpeed);
         targetSeries = new LineGraphSeries<DataPoint>(targetPoints);
         series = new LineGraphSeries<DataPoint>(points);
@@ -92,14 +96,14 @@ private LineGraphSeries<DataPoint> series;
         targetSeries.setColor(Color.RED);
         setLayout();
     }
-    public void cycleStatsForward(){
-        if(statCyclerZ==0){
+
+    public void cycleStatsForward() {
+        if (statCyclerZ == 0) {
             vib.vibrate(100);
             Toast.makeText(getApplicationContext(), "Delat!",
                     Toast.LENGTH_SHORT).show();
 
-        }
-        else if(statCyclerZ == 1){
+        } else if (statCyclerZ == 1) {
             vib.vibrate(100);
             statCyclerZ = 0;
             setLayout();
@@ -107,33 +111,35 @@ private LineGraphSeries<DataPoint> series;
 
 
     }
-    public void cycleStatsBack(){
-        if(statCyclerZ == 0){
+
+    public void cycleStatsBack() {
+        if (statCyclerZ == 0) {
             vib.vibrate(100);
             statCyclerZ = 1;
             setLayout();
         }
 
     }
-public void cycleStatsRight() {
-    vib.vibrate(100);
-    statCyclerX++;
-    if (statCyclerX == 3) {
-        statCyclerX = 0;
-    }
-    setLayout();
-}
 
-    public void cycleStatsLeft(){
+    public void cycleStatsRight() {
+        vib.vibrate(100);
+        statCyclerX++;
+        if (statCyclerX == 3) {
+            statCyclerX = 0;
+        }
+        setLayout();
+    }
+
+    public void cycleStatsLeft() {
         vib.vibrate(100);
         statCyclerX--;
-        if(statCyclerX == -1){
+        if (statCyclerX == -1) {
             statCyclerX = 2;
         }
         setLayout();
     }
 
-    public void reloadGraph(){
+    public void reloadGraph() {
         graph = (GraphView) findViewById(R.id.graph);
 
         graph.addSeries(series);
@@ -146,57 +152,55 @@ public void cycleStatsRight() {
 
         graph.getViewport().setScrollable(true);
     }
-public void setLayout(){
 
-    if(statCyclerX == 0){
-        if(statCyclerZ==0) {
-            setContentView(R.layout.activity_stats_0);
-            TextView text = (TextView) findViewById(R.id.text0);
-            TextView text3 = (TextView) findViewById(R.id.text3);
-            text.setText( targetDist + " Meter");
-            text3.setText(graphMaxX + " Sekunder");
+    public void setLayout() {
+
+        if (statCyclerX == 0) {
+            if (statCyclerZ == 0) {
+                setContentView(R.layout.activity_stats_0);
+                TextView text = (TextView) findViewById(R.id.text0);
+                TextView text3 = (TextView) findViewById(R.id.text3);
+                text.setText(targetDist + " Meter");
+                text3.setText(graphMaxX + " Sekunder");
+            } else if (statCyclerZ == 1) {
+                setContentView(R.layout.activity_stats_0b);
+            }
         }
-        else if(statCyclerZ==1){
-            setContentView(R.layout.activity_stats_0b);
+        if (statCyclerX == 1) {
+            if (statCyclerZ == 0) {
+                setContentView(R.layout.activity_stats_1);
+                TextView text = (TextView) findViewById(R.id.text1);
+                int kcalBurned = 83 * targetDist / 1000;
+                String comparison;
+                if (kcalBurned < 100)
+                    comparison = "liten";
+                else if (kcalBurned < 200)
+                    comparison = "ganska liten";
+                else if (kcalBurned < 500)
+                    comparison = "normalstor";
+
+                else if (kcalBurned < 1000)
+                    comparison = "jättestor";
+
+                else
+                    comparison = "alldeles onödigt stor";
+
+
+                text.setText("Du brände " + 83 * targetDist / 1000 + " kcal! Det är lika mycket som en " + comparison + " skinkmacka!");
+            } else if (statCyclerZ == 1) {
+                setContentView(R.layout.activity_stats_1b);
+            }
         }
+        if (statCyclerX == 2) {
+            if (statCyclerZ == 0) {
+                setContentView(R.layout.activity_stats_2);
+                reloadGraph();
+            } else if (statCyclerZ == 1) {
+                setContentView(R.layout.activity_stats_2b);
+            }
+        }
+
     }
-    if(statCyclerX == 1){
-        if(statCyclerZ==0){
-        setContentView(R.layout.activity_stats_1);
-        TextView text = (TextView) findViewById(R.id.text1);
-        int kcalBurned = 83*targetDist/1000;
-        String comparison;
-        if(kcalBurned < 100)
-            comparison = "liten";
-        else if(kcalBurned < 200)
-            comparison = "ganska liten";
-        else if(kcalBurned < 500)
-            comparison = "normalstor";
-
-     else if(kcalBurned < 1000)
-        comparison = "jättestor";
-
-        else
-        comparison = "alldeles onödigt stor";
-
-
-        text.setText("Du brände " + 83*targetDist/1000 + " kcal! Det är lika mycket som en " +comparison+ " skinkmacka!");
-    }
-    else if (statCyclerZ ==1){
-            setContentView(R.layout.activity_stats_1b);
-        }
-    }
-    if(statCyclerX == 2){
-        if(statCyclerZ==0) {
-            setContentView(R.layout.activity_stats_2);
-            reloadGraph();
-        }
-        else if(statCyclerZ==1){
-            setContentView(R.layout.activity_stats_2b);
-        }
-    }
-
-}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -219,7 +223,6 @@ public void setLayout(){
 
         return super.onOptionsItemSelected(item);
     }
-
 
 
     @Override

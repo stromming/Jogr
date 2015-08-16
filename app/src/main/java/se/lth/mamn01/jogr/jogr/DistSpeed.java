@@ -17,12 +17,13 @@ public class DistSpeed extends ActionBarActivity {
     NumberPicker minPicker;
     EditText dist;
     EditText minutes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_distspeed);
-        dist =(EditText)findViewById(R.id.editText5);
-        minutes =(EditText)findViewById(R.id.editText99);
+        dist = (EditText) findViewById(R.id.editText5);
+        minutes = (EditText) findViewById(R.id.editText99);
 //        hPicker = (NumberPicker)findViewById(R.id.hPicker);
 //        hPicker.setMaxValue(10);
 //        hPicker.setMinValue(0);
@@ -54,28 +55,29 @@ public class DistSpeed extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    public void nextPage(View view){
+
+    public void nextPage(View view) {
         String distString = dist.getText().toString();
         String minutesString = minutes.getText().toString();
 //        int time = hPicker.getValue()* 3600+ minPicker.getValue()*60;
-        int time = Integer.parseInt(minutesString)*60;
-        if(Integer.parseInt(distString)/time > 15){
+        int time = Integer.parseInt(minutesString) * 60;
+        if (Integer.parseInt(distString) / time > 15) {
             Toast.makeText(getApplicationContext(), "Orimlig hastighet. Prova något lägre. t.ex. 400 meter på 1 minut.",
                     Toast.LENGTH_LONG).show();
 
-        } else  if (Integer.parseInt(distString) < 1 || Integer.parseInt(minutesString) < 1) {
-                Toast.makeText(getApplicationContext(), "Fyll i den tid och den distans du vill springa innan du kan starta.",
-                        Toast.LENGTH_LONG).show();
+        } else if (Integer.parseInt(distString) < 1 || Integer.parseInt(minutesString) < 1) {
+            Toast.makeText(getApplicationContext(), "Fyll i den tid och den distans du vill springa innan du kan starta.",
+                    Toast.LENGTH_LONG).show();
 
-            } else {
-                Intent intent = new Intent(this, Simulering.class);
+        } else {
+            Intent intent = new Intent(this, Simulering.class);
 
 
-                intent.putExtra("variables", distString + " " + time);
+            intent.putExtra("variables", distString + " " + time);
 
-                startActivity(intent);
-            }
+            startActivity(intent);
         }
-        }
+    }
+}
 
 

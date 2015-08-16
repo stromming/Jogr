@@ -13,21 +13,32 @@ package se.lth.mamn01.jogr.jogr;
 public class MediaButtonReceiver extends BroadcastReceiver {
 
     private KeyEvent event;
-    private Simulering sim;
+    private OnPressListener mListener;
+
     public MediaButtonReceiver() {
         super();
 
     }
-    public void attach(Simulering sim) {
 
-        this.sim=sim;
+    public interface OnPressListener {
+        /**
+         * Called when press is detected.
+         */
+        public void onMediaButtonPress();
+
+        void mkToast();
     }
+
+    public void setOnPressListener(OnPressListener listener) {
+        mListener = listener;
+    }
+
 
 
     @Override
     public void onReceive(Context context, Intent intent) {
         //Toast toast = Toast.makeText(context, "test", Toast.LENGTH_SHORT);
-
+       mListener.mkToast();
         Log.d("TEST","OK1");
         if (Intent.ACTION_MEDIA_BUTTON.equals(intent.getAction())) {
 
@@ -36,7 +47,7 @@ public class MediaButtonReceiver extends BroadcastReceiver {
 
 
             if (KeyEvent.KEYCODE_HEADSETHOOK == event.getKeyCode()) {
-            sim.setNewSpeed();
+                mListener.onMediaButtonPress();
             //    toast.show();
             }
         }

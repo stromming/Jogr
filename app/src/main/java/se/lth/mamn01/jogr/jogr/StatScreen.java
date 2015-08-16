@@ -63,8 +63,9 @@ private LineGraphSeries<DataPoint> series;
 
 
         Bundle extras = getIntent().getExtras();
+
         long[] xValues = extras.getLongArray("xValues");
-        long[] yValues = extras.getLongArray("yValues");
+        float[] yValues = extras.getFloatArray("yValues");
         targetSpeed = extras.getInt("targetSpeed");
         targetDist = extras.getInt("targetDist");
         int entries = 0;

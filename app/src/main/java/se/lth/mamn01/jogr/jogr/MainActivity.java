@@ -30,15 +30,17 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_splash);
         ImageView iv = (ImageView) findViewById(R.id.imageView2);
         iv.setImageResource(R.drawable.splashny);
+        delayedSwitch();
+
+    }
+    public void delayedSwitch(){
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 setContentView(R.layout.activity_main);
             }
         }, 3000);
-
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

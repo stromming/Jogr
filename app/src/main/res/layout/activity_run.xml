@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    
+    android:background="#ff000000"
+   >
+
+
+    <FrameLayout
+    android:layout_width="fill_parent"
+    android:layout_height="150dp">
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:textSize="50dp"
+            android:text="453 m"
+            android:id="@+id/meter1"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="150dp">
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            android:layout_width="429dp"
+            android:layout_height="50dp"
+            android:visibility="visible"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:max="100"
+            android:layout_gravity="center"
+            android:indeterminate="false"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="300dp">
+
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/imageView11"
+            android:layout_marginLeft="60dp"
+            android:background="@mipmap/speedometer"/>
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:text="5,3"
+            android:id="@+id/speed1"
+            android:textSize="35dp"
+            android:layout_marginLeft="130dp"/>
+
+
+
+
+
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/imageView10"
+            android:layout_marginLeft="60dp"
+            android:background="@mipmap/time"
+            android:layout_marginTop="70dp"
+            />
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:textSize="35dp"
+            android:text="0:11"
+            android:id="@+id/time1"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="130dp"
+            />
+
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="450dp">
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Klar!"
+            android:id="@+id/button"
+            android:onClick="nextPage"
+            android:clickable="true"
+            android:enabled="true"
+            android:layout_gravity="right"
+            android:layout_marginRight="20dp"/>
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:id="@+id/pause1"
+            android:background="@mipmap/pause"
+            android:layout_gravity="right"
+            android:layout_marginRight="140dp"
+            android:onClick="pauseButton"/>
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:id="@+id/imageButton4"
+            android:background="@mipmap/play"
+            android:layout_gravity="right"
+            android:layout_marginRight="200dp"
+            android:onClick="resumeButton"
+            />
+
+    </FrameLayout>
+
+
+
+
+
+
+
+
+
+</FrameLayout>

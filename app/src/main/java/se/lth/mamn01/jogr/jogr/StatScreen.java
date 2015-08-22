@@ -30,7 +30,7 @@ public class StatScreen extends Activity {
     private ShakeEventListener mSensorListener;
     private int statCyclerX = 0;
     private int statCyclerZ = 0;
-    private int targetSpeed;
+    private float targetSpeed;
     private int targetDist;
     private Vibrator vib;
     private LineGraphSeries<DataPoint> series;
@@ -46,13 +46,8 @@ public class StatScreen extends Activity {
         mSensorListener = new ShakeEventListener();
 
         mSensorListener.setOnShakeListener(new ShakeEventListener.OnShakeListener() {
-            public void onShakeForward() {
-                cycleStatsForward();
-            }
 
-            public void onShakeBack() {
-                cycleStatsBack();
-            }
+
 
             public void onShakeLeft() {
                 statCyclerZ = 0;
@@ -70,7 +65,7 @@ public class StatScreen extends Activity {
 
         long[] xValues = extras.getLongArray("xValues");
         float[] yValues = extras.getFloatArray("yValues");
-        targetSpeed = extras.getInt("targetSpeed");
+        targetSpeed = extras.getFloat("targetSpeed");
         targetDist = extras.getInt("targetDist");
         int entries = 0;
         for (int i = 0; i < xValues.length; i++) {
@@ -156,18 +151,16 @@ public class StatScreen extends Activity {
     public void setLayout() {
 
         if (statCyclerX == 0) {
-            if (statCyclerZ == 0) {
+
                 setContentView(R.layout.activity_stats_0);
                 TextView text = (TextView) findViewById(R.id.text0);
                 TextView text3 = (TextView) findViewById(R.id.text3);
                 text.setText(targetDist + " Meter");
                 text3.setText(graphMaxX + " Sekunder");
-            } else if (statCyclerZ == 1) {
-                setContentView(R.layout.activity_stats_0b);
-            }
+
         }
         if (statCyclerX == 1) {
-            if (statCyclerZ == 0) {
+
                 setContentView(R.layout.activity_stats_1);
                 TextView text = (TextView) findViewById(R.id.text1);
                 int kcalBurned = 83 * targetDist / 1000;
@@ -187,17 +180,13 @@ public class StatScreen extends Activity {
 
 
                 text.setText("Du brände " + 83 * targetDist / 1000 + " kcal! Det är lika mycket som en " + comparison + " skinkmacka!");
-            } else if (statCyclerZ == 1) {
-                setContentView(R.layout.activity_stats_1b);
-            }
+
         }
         if (statCyclerX == 2) {
-            if (statCyclerZ == 0) {
+
                 setContentView(R.layout.activity_stats_2);
                 reloadGraph();
-            } else if (statCyclerZ == 1) {
-                setContentView(R.layout.activity_stats_2b);
-            }
+
         }
 
     }

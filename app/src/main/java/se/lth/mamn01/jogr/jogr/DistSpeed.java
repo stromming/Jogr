@@ -3,7 +3,6 @@ package se.lth.mamn01.jogr.jogr;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,17 +59,20 @@ public class DistSpeed extends ActionBarActivity {
         String distString = dist.getText().toString();
         String minutesString = minutes.getText().toString();
 //        int time = hPicker.getValue()* 3600+ minPicker.getValue()*60;
+
+    if (distString == null || distString.equals("") || minutesString == null || minutesString.equals("")) {
+        Toast.makeText(getApplicationContext(), "Fyll i den tid och den distans du vill springa innan du kan starta.",
+                Toast.LENGTH_LONG).show();
+return;
+    }
         int time = Integer.parseInt(minutesString) * 60;
-        if (Integer.parseInt(distString) / time > 15) {
-            Toast.makeText(getApplicationContext(), "Orimlig hastighet. Prova något lägre. t.ex. 400 meter på 1 minut.",
-                    Toast.LENGTH_LONG).show();
-
-        } else if (Integer.parseInt(distString) < 1 || Integer.parseInt(minutesString) < 1) {
-            Toast.makeText(getApplicationContext(), "Fyll i den tid och den distans du vill springa innan du kan starta.",
-                    Toast.LENGTH_LONG).show();
-
-        } else {
-            Intent intent = new Intent(this, Simulering.class);
+        if (Integer.parseInt(distString) / time > 15)
+    {
+        Toast.makeText(getApplicationContext(), "Orimlig hastighet. Prova något lägre. t.ex. 400 meter på 1 minut.",
+                Toast.LENGTH_LONG).show();
+    }
+      else {
+            Intent intent = new Intent(this, RunActivity.class);
 
 
             intent.putExtra("variables", distString + " " + time);

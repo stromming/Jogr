@@ -15,15 +15,14 @@ public class ShakeEventListener implements SensorEventListener {
     /**
      * Minimum movement force to consider.
      */
-    private static final int MIN_FORCE_X = 5;
-    private static final int MIN_FORCE_Z = 7;
+    private static final int MIN_FORCE_X = 7;
 
     private static final int MIN_TIME_BETWEEN_SHAKES = 500;
     /**
      * Minimum times in a shake gesture that the direction of movement needs to
      * change.
      */
-    private static final int MIN_DIRECTION_CHANGE = 2;
+    private static final int MIN_DIRECTION_CHANGE = 3;
 
     /**
      * Maximum pause between movements.
@@ -55,15 +54,6 @@ public class ShakeEventListener implements SensorEventListener {
      */
     private float lastX = 0;
 
-    /**
-     * The last y position.
-     */
-    private float lastY = 0;
-
-    /**
-     * The last z position.
-     */
-    private float lastZ = 0;
 
     private long blockTime = 0;
     /**
@@ -87,9 +77,7 @@ public class ShakeEventListener implements SensorEventListener {
 
         void onShakeRight();
 
-        void onShakeForward();
 
-        void onShakeBack();
     }
 
     public void setOnShakeListener(OnShakeListener listener) {
@@ -97,7 +85,6 @@ public class ShakeEventListener implements SensorEventListener {
     }
 
 
-    //Denna kod verkar köras även när sensorn inte ändras. Spelar dock ingen roll, så länge vi läser av värdena på accelerometern.
     @Override
     public void onSensorChanged(SensorEvent se) {
         // get sensor data
@@ -113,10 +100,6 @@ public class ShakeEventListener implements SensorEventListener {
 
         if (totalMovementX > MIN_FORCE_X) {
 
-            //För test
-            // mShakeListener.onShake();
-            // resetShakeParameters();
-
 
             // get time
             long now = System.currentTimeMillis();
@@ -129,14 +112,7 @@ public class ShakeEventListener implements SensorEventListener {
 
                 mFirstDirectionChangeTime = now;
                 mLastDirectionChangeTime = now;
-                /*if(totalMovementZ > MIN_FORCE_Z){
-                    if(z-lastZ >= 0){
-                        direction = 3;
-                    }
-                    else{
-                        direction = 4;
-                    }
-                }*/
+
                 if (totalMovementX > MIN_FORCE_X) {
 
 
@@ -160,8 +136,7 @@ public class ShakeEventListener implements SensorEventListener {
 
                 // store last sensor data
                 lastX = x;
-                lastY = y;
-                lastZ = z;
+
 
                 // check how many movements are so far
                 if (mDirectionChangeCount >= MIN_DIRECTION_CHANGE) {
@@ -178,22 +153,16 @@ public class ShakeEventListener implements SensorEventListener {
                         } else if (direction == 2) {
 
                             mShakeListener.onShakeLeft();
-                        } else if (direction == 4) {
-
-                            mShakeListener.onShakeForward();
-                        } else if (direction == 3) {
-
-                            mShakeListener.onShakeBack();
                         }
                         resetShakeParameters();
-                        //lastZ = se.values[2];
+
 
                     }
                 }
 
             } else {
                 resetShakeParameters();
-                // lastZ = se.values[2];
+
             }
         }
     }
@@ -206,7 +175,6 @@ public class ShakeEventListener implements SensorEventListener {
         mDirectionChangeCount = 0;
         mLastDirectionChangeTime = 0;
         lastX = 0;
-        lastY = 0;
 
         direction = 0;
     }

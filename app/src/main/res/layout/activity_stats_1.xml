@@ -29,12 +29,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/space1000"
-        android:layout_weight="0.35" />
+        android:layout_weight="0.39" />
 
     <RadioGroup
         android:layout_width="100dp"
         android:layout_height="45dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="bottom|center_horizontal"
         android:orientation="horizontal">
 
         <RadioButton

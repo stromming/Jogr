@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
@@ -19,11 +18,12 @@ import android.os.Handler;
 import android.media.MediaPlayer;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Filip on 2015-04-21.
  */
-public class Simulering extends Activity implements LocationListener, SharedPreferences.OnSharedPreferenceChangeListener {
+public class RunActivity extends Activity implements LocationListener, SharedPreferences.OnSharedPreferenceChangeListener {
     long timeStarted;
     String[] values;
     Handler handler;
@@ -62,7 +62,7 @@ AudioManager am;
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_simulering);
+        setContentView(R.layout.activity_run);
         getSharedPreferences("myPrefs",
                 Context.MODE_MULTI_PROCESS).registerOnSharedPreferenceChangeListener(this);
 
@@ -72,7 +72,7 @@ AudioManager am;
 
         currentSpeedView.setText("0");
         currentTimeView.setText("00:00");
-        currentMeterView.setText("0");
+        currentMeterView.setText("0 m");
          am = (AudioManager)getSystemService(AUDIO_SERVICE);
 
         am.registerMediaButtonEventReceiver(new ComponentName(getPackageName(), MediaButtonReceiver.class.getName()));
@@ -113,7 +113,7 @@ AudioManager am;
         distRemaining = Integer.parseInt(values[0]);
         targetDist = distRemaining;
         time = Integer.parseInt(values[1]);
-        goalSpeed = distRemaining / time;
+        goalSpeed = distRemaining / (float)time;
         SharedPreferences.Editor editor = getSharedPreferences("myPrefs",
                 Context.MODE_MULTI_PROCESS).edit();
         editor.putBoolean("flag", false);
@@ -130,6 +130,7 @@ AudioManager am;
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
         lastTick = System.currentTimeMillis();
+        Toast.makeText(this,"Målhastighet: " + goalSpeed + " m/s", Toast.LENGTH_LONG).show();
         handler.postDelayed(runnable, 100);
 
 
@@ -145,34 +146,34 @@ AudioManager am;
 
             prevSpeed = speed;
 
-            if (location != null) {
+            if (location != null && location.getSpeed() != 0) {
 
                 speed = location.getSpeed();
                 currentSpeedView.setText(String.valueOf(speed));
-                int cTime = (int) (System.currentTimeMillis() - timeStarted) / 1000;
-                int min = (cTime / 60);
-                int sec = (cTime % 60);
-                String minString;
-                String secString;
-                if(min<10) {
-                    minString = "0" + String.valueOf(min);
-                }
-                else{
-                    minString = String.valueOf(min);
-
-                }
-                if(sec<10){
-                    secString = "0" +String.valueOf(sec);
-                }
-                else{
-                    secString = String.valueOf(sec);
-                }
-                currentTimeView.setText(minString + ":" + secString);
-
-                currentMeterView.setText(String.valueOf(targetDist - distRemaining));
 
 
             }
+            int cTime = (int) (System.currentTimeMillis() - timeStarted) / 1000;
+            int min = (cTime / 60);
+            int sec = (cTime % 60);
+            String minString;
+            String secString;
+            if(min<10) {
+                minString = "0" + String.valueOf(min);
+            }
+            else{
+                minString = String.valueOf(min);
+
+            }
+            if(sec<10){
+                secString = "0" +String.valueOf(sec);
+            }
+            else{
+                secString = String.valueOf(sec);
+            }
+            currentTimeView.setText(minString + ":" + secString);
+
+            currentMeterView.setText(String.valueOf(targetDist - distRemaining) + " m");
 
             //Aadd new information for the Stat Screen diagram.
 
@@ -204,14 +205,14 @@ AudioManager am;
                     }
 
                 } else if (speed < goalSpeed) {
-                    if (countLow == 10) {
+                    if (countLow == 5) {
                         playLowSpeed.start();
                         countHigh = 0;
                         goodSpeed = false;
                     }
                     countLow++;
                 } else {
-                    if (countHigh == 10) {
+                    if (countHigh == 5) {
                         playHighSpeed.start();
                         goodSpeed = false;
                         countLow = 0;
@@ -220,7 +221,6 @@ AudioManager am;
 
                 }
                 double tickTime = (System.currentTimeMillis() - lastTick) / 1000.0;
-                //Toast.makeText(getBaseContext(), "Tick time: " + String.valueOf(tickTime), Toast.LENGTH_LONG).show();
                 lastTick = System.currentTimeMillis();
                 distRemaining = distRemaining - (int) (speed * tickTime);
                 bar.setProgress((int) (100 - 100 * distRemaining / (double) (targetDist)));
@@ -290,7 +290,12 @@ AudioManager am;
 
     }
 
-
+    public void resumeButton(View v){
+    Toast.makeText(this,"Inte implementerad i demoversionen", Toast.LENGTH_SHORT).show();
+    }
+    public void pauseButton(View v){
+        Toast.makeText(this,"Inte implementerad i demoversionen", Toast.LENGTH_SHORT).show();
+    }
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         playGoodSpeed.stop();
@@ -307,4 +312,7 @@ AudioManager am;
             Log.d("Simulering", "goal speed changed");
         }
     }
+
+
+
 }

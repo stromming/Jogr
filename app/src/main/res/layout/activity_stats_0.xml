@@ -5,14 +5,6 @@
     android:weightSum="1"
     android:background="#ff000000">
 
-    <Button
-        android:layout_width="280dp"
-        android:layout_height="45dp"
-        android:text="^ Dela till facebook! ^"
-        android:id="@+id/button2"
-        android:layout_gravity="center_horizontal"
-        android:clickable="false" />
-
     <Space
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -69,7 +61,7 @@
         android:layout_width="267dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Använd skakningar framåt, bakåt eller åt sidorna för att navigera statistikskärmarna. \n Skakningarna fungerar bäst om telefonen är lodrät."
+        android:text="Använd skakningar åt sidorna för att navigera statistikskärmarna."
         android:id="@+id/textView9"
         android:layout_weight="1.00"
         android:layout_gravity="center_horizontal" />
@@ -108,14 +100,6 @@
             android:layout_weight="0.09"
             />
     </RadioGroup>
-
-    <Button
-        android:layout_width="280dp"
-        android:layout_height="45dp"
-        android:text="v  Mer information  v"
-        android:id="@+id/button7"
-        android:layout_gravity="center_horizontal"
-        android:clickable="false" />
 
 </LinearLayout>
 

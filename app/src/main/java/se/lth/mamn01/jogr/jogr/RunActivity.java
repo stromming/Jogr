@@ -310,6 +310,7 @@ AudioManager am;
             editor.apply();
             goalSpeed = prevSpeed;
             Log.d("Simulering", "goal speed changed");
+            Toast.makeText(this,"Ny målhastighet: " + goalSpeed, Toast.LENGTH_SHORT).show();
         }
     }
 
